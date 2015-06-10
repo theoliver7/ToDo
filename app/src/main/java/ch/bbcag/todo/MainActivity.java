@@ -145,5 +145,8 @@ public class MainActivity extends ActionBarActivity
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
     }
+    /**
+     * LOL
+     */
 
 }
