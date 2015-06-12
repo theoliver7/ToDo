@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+    android:layout_height="fill_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="ch.bbcag.todo.AufgabeHerstellen$PlaceholderFragment"
+    android:id="@+id/main_layout"
+    android:orientation="horizontal">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/neueAufgabe"
+        android:text="Neue Aufgabe" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Aufgabe"
+        android:id="@+id/aufgabeEingeben"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/aufgabe"
+        android:layout_alignEnd="@+id/neueAufgabe" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/aufgabe"
+        android:text="Aufgabe: "
+        android:layout_below="@+id/neueAufgabe"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/beschreibung"
+        android:text="Beschreibung"
+        android:layout_below="@+id/aufgabeEingeben"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Beschreibung"
+        android:id="@+id/beschreibungUser"
+        android:layout_below="@+id/beschreibung"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>
