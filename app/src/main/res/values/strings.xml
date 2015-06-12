@@ -9,6 +9,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="verwalten">Verwaltung</string>
 
-
     <string name="action_settings">Neue Liste</string>
+    <string name="maintitle">Hello World</string>
+    <string name="mainDescription">Das ist eine Application</string>
 </resources>

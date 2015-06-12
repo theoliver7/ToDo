@@ -9,18 +9,25 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.widget.ArrayAdapter;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+import android.widget.ArrayAdapter;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     ArrayAdapter toDoListen;
+    ArrayList<String> listItems = new ArrayList<String>();
 
+    //DEFINING A STRING ADAPTER WHICH WILL HANDLE THE DATA OF THE LISTVIEW
+    ArrayAdapter<String> adapter;
+
+    //RECORDING HOW MANY TIMES THE BUTTON HAS BEEN CLICKED
+    int clickCounter = 0;
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -36,7 +43,7 @@ public class MainActivity extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+//        addListenToList();
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -45,9 +52,25 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1,
+                listItems);
+        listItems.setAdapter(adapter);
     }
 
 
+    public void addItems(View v) {
+        listItems.add("Clicked : " + clickCounter++);
+        adapter.notifyDataSetChanged();
+    }
+//    private void addListenToList() {
+//        ListView todoListen = (ListView) findViewById((R.id.toDoListenList));
+//        toDoListen = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+//        toDoListen.add(getString(R.string.verwalten));
+//        todoListen.setAdapter(toDoListen);
+//
+//    }
 
 
     @Override
@@ -58,18 +81,19 @@ public class MainActivity extends ActionBarActivity
                 .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
                 .commit();
     }
-/**
-    public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.title_section1);
-                break;
-            case 2:
-                mTitle = getString(R.string.title_section2);
-                break;
-        }
-    }
-*/
+
+    /**
+     * public void onSectionAttached(int number) {
+     * switch (number) {
+     * case 1:
+     * mTitle = getString(R.string.title_section1);
+     * break;
+     * case 2:
+     * mTitle = getString(R.string.title_section2);
+     * break;
+     * }
+     * }
+     */
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
@@ -90,6 +114,7 @@ public class MainActivity extends ActionBarActivity
         }
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -134,6 +159,7 @@ public class MainActivity extends ActionBarActivity
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
             return rootView;
         }
 
@@ -142,9 +168,8 @@ public class MainActivity extends ActionBarActivity
             super.onAttach(activity);
 
         }
+
+
     }
-    /**
-     * No LOL
-     */
 
 }
