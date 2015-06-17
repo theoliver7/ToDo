@@ -53,10 +53,7 @@ public class MainActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
-        adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1,
-                listItems);
-        listItems.setAdapter(adapter);
+        ;
     }
 
 
@@ -75,10 +72,24 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
+        Fragment myFragment = null;
+
+        switch (position) {
+            case 0:
+                myFragment = new Aufgaben_erstellen_Fragment();
+                break;
+            case 1:
+                myFragment = new Second_Fragment();
+                break;
+
+        }
+
+
+
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container, myFragment)
                 .commit();
     }
 
