@@ -12,4 +12,10 @@
     <string name="action_settings">Neue Liste</string>
     <string name="maintitle">Hello World</string>
     <string name="mainDescription">Das ist eine Application</string>
+
+    <string-array name="test_array">
+        <item>Einkaufen</item>
+        <item>Hausaufgaben</item>
+        <item>Arbeit</item>
+    </string-array>
 </resources>

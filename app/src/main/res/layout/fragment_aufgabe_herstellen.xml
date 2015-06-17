@@ -8,43 +8,39 @@
     android:id="@+id/main_layout"
     android:orientation="horizontal">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/neueAufgabe"
-        android:text="Neue Aufgabe" />
-
-    <TextView
+    <Spinner
+        android:id="@+id/spinner"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Aufgabe"
-        android:id="@+id/aufgabeEingeben"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Liste Auswählen"
+        android:id="@+id/textView"
+        android:layout_above="@+id/spinner"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Neue Aufgabe"
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Aufgabe:"
+        android:id="@+id/textView3"
+        android:layout_below="@+id/textView2"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/aufgabe"
-        android:layout_alignEnd="@+id/neueAufgabe" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/aufgabe"
-        android:text="Aufgabe: "
-        android:layout_below="@+id/neueAufgabe"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/beschreibung"
-        android:text="Beschreibung"
-        android:layout_below="@+id/aufgabeEingeben"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Beschreibung"
-        android:id="@+id/beschreibungUser"
-        android:layout_below="@+id/beschreibung"
-        android:layout_alignParentStart="true" />
+        android:layout_marginTop="47dp" />
 
 </RelativeLayout>

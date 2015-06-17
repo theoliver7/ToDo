@@ -16,6 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 
@@ -32,26 +34,39 @@ public class AufgabeHerstellen extends ActionBarActivity
      */
     private CharSequence mTitle;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_aufgabe_herstellen);
+
+        setContentView(R.layout.fragment_aufgabe_herstellen);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
-        // Set up the drawer.
+//        // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
         doFormular();
+        createSpinner();
     }
 
     private void doFormular(){
 
     }
+    private void createSpinner(){
+        int spinnerId = R.id.spinner;
+        Spinner spinner = (Spinner) findViewById(spinnerId);
 
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.test_array, android.R.layout.simple_spinner_item);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(adapter);
+    }
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
@@ -69,9 +84,6 @@ public class AufgabeHerstellen extends ActionBarActivity
                 break;
             case 2:
                 mTitle = getString(R.string.title_section2);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_section3);
                 break;
         }
     }
@@ -141,6 +153,7 @@ public class AufgabeHerstellen extends ActionBarActivity
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_aufgabe_herstellen, container, false);
+
             return rootView;
         }
 
