@@ -79,7 +79,7 @@ public class MainActivity extends ActionBarActivity
                 myFragment = new Aufgaben_erstellen_Fragment();
                 break;
             case 1:
-                myFragment = new Second_Fragment();
+                myFragment = new Listen_Details_Fragment();
                 break;
 
         }

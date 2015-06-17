@@ -11,13 +11,13 @@ import android.view.ViewGroup;
 /**
  * Created by zascho on 17.06.2015.
  */
-public class Second_Fragment extends Fragment {
+public class Listen_Details_Fragment extends Fragment {
     View myView;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        myView = inflater.inflate(R.layout.second_layout, container, false);
+        myView = inflater.inflate(R.layout.listen_details_layout, container, false);
         return myView;
     }
 }
