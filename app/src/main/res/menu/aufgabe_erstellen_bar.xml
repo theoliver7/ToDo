@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:icon="@drawable/ic_drawer"
+    tools:context=".MainActivity"
+    >
+
+    <item
+        android:id="@+id/camera"
+        android:title="@string/action_settings"
+        android:orderInCategory="100"
+        android:icon="@mipmap/camera"
+        app:showAsAction="always"
+        />
+</menu>
