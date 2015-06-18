@@ -3,20 +3,22 @@ package ch.bbcag.todo.database;
 /**
  * Created by zascho on 17.06.2015.
  */
-public class ToDoItem {
+public class Aufgabe {
 
     private String aufgabe;
     private String beschreibung;
-    private String erinnerung_zeit;
+
+    public int getErinngerungszeit() {
+        return erinngerungszeit;
+    }
+
+    public void setErinngerungszeit(int erinngerungszeit) {
+        this.erinngerungszeit = erinngerungszeit;
+    }
+
+    private int erinngerungszeit;
     private int wichtigkeit;
 
-    public String getErinnerung_zeit() {
-        return erinnerung_zeit;
-    }
-
-    public void setErinnerung_zeit(String erinnerung_zeit) {
-        this.erinnerung_zeit = erinnerung_zeit;
-    }
 
 
     public String getAufgabe() {

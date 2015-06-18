@@ -14,7 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+
+import ch.bbcag.todo.database.Aufgabe;
+import ch.bbcag.todo.database.AufgabenDAO;
 
 
 public class MainActivity extends ActionBarActivity
@@ -47,13 +51,24 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
-
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
-        ;
+
+        Aufgabe todo1 = new Aufgabe();
+        todo1.setAufgabe("Test");
+        todo1.setBeschreibung("Beschreibung");
+        todo1.setErinngerungszeit(1);
+        todo1.setWichtigkeit(1);
+        AufgabenDAO test = new AufgabenDAO(getApplicationContext());
+        try {
+            test.open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        long todo1_id = test.aufgabeerstellen(todo1);
     }
 
 
@@ -61,14 +76,6 @@ public class MainActivity extends ActionBarActivity
         listItems.add("Clicked : " + clickCounter++);
         adapter.notifyDataSetChanged();
     }
-//    private void addListenToList() {
-//        ListView todoListen = (ListView) findViewById((R.id.toDoListenList));
-//        toDoListen = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
-//        toDoListen.add(getString(R.string.verwalten));
-//        todoListen.setAdapter(toDoListen);
-//
-//    }
-
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
