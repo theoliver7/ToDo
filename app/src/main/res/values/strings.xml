@@ -10,7 +10,12 @@
     <string name="verwalten">Verwaltung</string>
 
     <string name="action_settings">Neue Liste</string>
+    <string name="burger">burger</string>
+
     <string name="maintitle">Hello World</string>
+    <string name="aufgabe">Aufgabe</string>
+    <string name="beschreibung">Beschreibung</string>
+
     <string name="mainDescription">Das ist eine Application</string>
 
     <string-array name="test_array">

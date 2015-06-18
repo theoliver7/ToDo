@@ -1,18 +1,23 @@
 package ch.bbcag.todo;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 
@@ -21,6 +26,7 @@ public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     ArrayAdapter toDoListen;
+
     ArrayList<String> listItems = new ArrayList<String>();
 
     //DEFINING A STRING ADAPTER WHICH WILL HANDLE THE DATA OF THE LISTVIEW
@@ -70,6 +76,7 @@ public class MainActivity extends ActionBarActivity
 //    }
 
 
+
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         Fragment myFragment = null;
@@ -79,9 +86,8 @@ public class MainActivity extends ActionBarActivity
                 myFragment = new Aufgaben_erstellen_Fragment();
                 break;
             case 1:
-                myFragment = new Second_Fragment();
+                myFragment = new Main_Fragment();
                 break;
-
         }
 
 
@@ -136,6 +142,34 @@ public class MainActivity extends ActionBarActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+            alert.setTitle("Wie soll ihre neue Liste heissen?");
+
+
+            // Set an EditText view to get user input
+            final EditText input = new EditText(this);
+            alert.setView(input);
+
+            alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+
+                    // Do something with value!
+                }
+            });
+            alert.setNeutralButton("pls", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    // Canceled.
+                }
+            });
+
+            alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    // Canceled.
+                }
+            });
+
+            alert.show();
             return true;
         }
         return super.onOptionsItemSelected(item);
