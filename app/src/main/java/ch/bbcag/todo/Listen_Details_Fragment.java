@@ -9,6 +9,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+
+import ch.bbcag.todo.database.Aufgabe;
 
 /**
  * Created by zascho on 17.06.2015.
@@ -29,4 +34,19 @@ public class Listen_Details_Fragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.plus, menu);
     }
+
+    private void addAufgabetolist() {
+
+
+        ListView list = (ListView) myView.findViewById(R.id.listView);
+        ArrayList<Aufgabe> aufgabe = new ArrayList<Aufgabe>();
+
+        list.setAdapter(new ch.berufsbildungscenter.train_alert.ownarrayadapter, aufgabe, getLayoutInflater());
+
+        list.setAdapter(list);
+    }
+
+
+
+
 }
