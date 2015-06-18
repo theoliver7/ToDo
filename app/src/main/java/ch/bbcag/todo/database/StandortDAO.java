@@ -11,7 +11,7 @@ public class StandortDAO extends DatabaseDAO {
         super(context);
     }
 
-    public long standorthinzufügen(Standort standort) {
+    public long standorthinzufueggen(Standort standort) {
         ContentValues values = new ContentValues();
         values.put(StandortSQL.ADRESSE, standort.getAdresse());
         values.put(StandortSQL.LADITUDE, standort.getLaditude());

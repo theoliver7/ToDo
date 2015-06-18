@@ -3,14 +3,12 @@ package ch.bbcag.todo;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -83,11 +81,12 @@ public class MainActivity extends ActionBarActivity
 
         switch (position) {
             case 0:
-                myFragment = new Aufgaben_erstellen_Fragment();
-                break;
-            case 1:
                 myFragment = new Main_Fragment();
                 break;
+            case 1:
+                myFragment = new Aufgaben_erstellen_Fragment();
+                break;
+
         }
 
 
@@ -151,19 +150,19 @@ public class MainActivity extends ActionBarActivity
             final EditText input = new EditText(this);
             alert.setView(input);
 
-            alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            alert.setPositiveButton("Erstellen", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
 
                     // Do something with value!
                 }
             });
-            alert.setNeutralButton("pls", new DialogInterface.OnClickListener() {
+            alert.setNeutralButton("Favoriten", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
                     // Canceled.
                 }
             });
 
-            alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            alert.setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
                     // Canceled.
                 }

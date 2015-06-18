@@ -5,40 +5,49 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
-import android.widget.Button;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-
-import java.util.ArrayList;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 /**
  * Created by zascho on 17.06.2015.
  */
 public class Main_Fragment extends Fragment {
     private View myView;
-    private ArrayList<String> test = new ArrayList<>();
+    private ArrayAdapter badiliste;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.main_layout, container, false);
-        test.add("test1");
-        test.add("test2");
-        test.add("test3");
-        test.add("test4");
-
-        int e = 0;
-        RelativeLayout x = (RelativeLayout) getActivity().findViewById(R.id.layout);
-        for (String i: test){
-            Button myButton = new Button(getActivity().getApplicationContext());
-            myButton.setId(e);
-            myButton.setText(i);
-            x.addView(myButton);
-            e++;
-
-        }
+        addBadisToList();
         return myView;
+    }
+
+    private void addBadisToList() {
+        ListView badis = (ListView) myView.findViewById((R.id.todolisten));
+        badiliste = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1);
+        badiliste.add(getString(R.string.verwalten));
+        badiliste.add(getString(R.string.verwalten));
+        badiliste.add(getString(R.string.verwalten));
+        badiliste.add(getString(R.string.verwalten));
+        badiliste.add(getString(R.string.verwalten));
+        badiliste.add(getString(R.string.verwalten));
+        badiliste.add(getString(R.string.verwalten));
+        badiliste.add(getString(R.string.verwalten));
+        badiliste.add(getString(R.string.verwalten));
+        badis.setAdapter(badiliste);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        super.onCreateOptionsMenu(menu, inflater);
+
+        inflater.inflate(R.menu.plus, menu);
     }
 }

@@ -4,24 +4,10 @@
     android:id="@+id/layout"
     >
 
-    <TextView
+    <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="ToDo"
-        android:id="@+id/textView7"
+        android:id="@+id/todolisten"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="60dp"
-        android:textSize="30dp"
-        android:layout_marginLeft="60dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Arbeit"
-        android:id="@+id/listButton_1"
-        android:layout_below="@+id/textView7"
-        android:layout_alignStart="@+id/textView7"
-        android:layout_marginTop="10dp" />
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
