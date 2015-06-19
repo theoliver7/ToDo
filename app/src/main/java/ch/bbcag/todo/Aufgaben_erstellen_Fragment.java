@@ -13,16 +13,26 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 
+import java.sql.SQLException;
 import java.util.Calendar;
+
+import ch.bbcag.todo.database.Aufgabe;
+import ch.bbcag.todo.database.AufgabenDAO;
 
 /**
  * Created by zascho on 17.06.2015.
  */
 public class Aufgaben_erstellen_Fragment extends Fragment {
     private View myView;
+    private EditText aufgabename;
+    private EditText beschreibung;
+    private Spinner liste;
+    private RadioGroup wichtigkeit;
 
     @Nullable
     @Override
@@ -64,6 +74,31 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
             }
         });
 
+        final Button aufgabeerstellenBtn = (Button) myView.findViewById(R.id.date);
+        aufgabeerstellenBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                aufgabename = (EditText) myView.findViewById(R.id.aufgabename);
+                beschreibung = (EditText) myView.findViewById(R.id.aufgabebeschreibung);
+                liste = (Spinner) myView.findViewById(R.id.ausgewählteliste);
+                wichtigkeit = (RadioGroup) myView.findViewById(R.id.wichtigkeit);
+
+                Aufgabe newAufgabe = new Aufgabe();
+                AufgabenDAO database = new AufgabenDAO(getActivity().getApplicationContext());
+                newAufgabe.setAufgabe(aufgabename.getText().toString());
+                newAufgabe.setBeschreibung(beschreibung.getText().toString());
+                newAufgabe.setListe(liste.getSelectedItem().toString());
+                newAufgabe.setWichtigkeit(wichtigkeit.getCheckedRadioButtonId());
+                try {
+                    database.open();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                database.aufgabeerstellen(newAufgabe);
+                database.close();
+            }
+        });
+
+
         return myView;
 
     }
@@ -78,7 +113,7 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
     }
 
     private void createSpinner(View view) {
-        Spinner spinner = (Spinner) view.findViewById(R.id.spinner);
+        Spinner spinner = (Spinner) view.findViewById(R.id.ausgewählteliste);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity().getBaseContext(),
                 R.array.test_array, android.R.layout.simple_spinner_item);
 

@@ -7,6 +7,19 @@ public class Aufgabe {
 
     private String aufgabe;
     private String beschreibung;
+    private int erinngerungszeit;
+    private int wichtigkeit;
+    private String liste;
+
+    public String getListe() {
+        return liste;
+    }
+
+    public void setListe(String liste) {
+        this.liste = liste;
+    }
+
+
 
     public int getErinngerungszeit() {
         return erinngerungszeit;
@@ -15,11 +28,6 @@ public class Aufgabe {
     public void setErinngerungszeit(int erinngerungszeit) {
         this.erinngerungszeit = erinngerungszeit;
     }
-
-    private int erinngerungszeit;
-    private int wichtigkeit;
-
-
 
     public String getAufgabe() {
         return aufgabe;
