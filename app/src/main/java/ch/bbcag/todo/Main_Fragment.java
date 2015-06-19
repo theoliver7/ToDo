@@ -47,7 +47,6 @@ public class Main_Fragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
         super.onCreateOptionsMenu(menu, inflater);
-
-        inflater.inflate(R.menu.plus_liste, menu);
+        inflater.inflate(R.menu.plus_Liste, menu);
     }
 }

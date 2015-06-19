@@ -4,7 +4,7 @@
     tools:context=".MainActivity">
     <item
         android:id="@+id/plus_aufgabe"
-        android:title="@string/plus"
+        android:title="@string/plus_aufgabe"
         android:orderInCategory="100"
         android:icon="@mipmap/plus"
         app:showAsAction="always" />

@@ -81,10 +81,10 @@ public class MainActivity extends ActionBarActivity
 
         switch (position) {
             case 0:
-                myFragment = new Listen_Details_Fragment();
+                myFragment = new Main_Fragment();
                 break;
             case 1:
-                myFragment = new Aufgaben_erstellen_Fragment();
+                myFragment = new Listen_Details_Fragment();
                 break;
 
         }
@@ -124,7 +124,7 @@ public class MainActivity extends ActionBarActivity
             // Only show items in the action bar relevant to this screen
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.plus_aufgabe, menu);
+            getMenuInflater().inflate(R.menu.plus, menu);
             restoreActionBar();
             return true;
         }
