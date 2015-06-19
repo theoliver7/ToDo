@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,12 +18,17 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import ch.bbcag.todo.database.Aufgabe;
 import ch.bbcag.todo.database.AufgabenDAO;
+import ch.bbcag.todo.database.ToDoList;
+import ch.bbcag.todo.database.ToDoListDAO;
 
 /**
  * Created by zascho on 17.06.2015.
@@ -33,6 +39,7 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
     private EditText beschreibung;
     private Spinner liste;
     private RadioGroup wichtigkeit;
+    private String[] arraySpinner;
 
     @Nullable
     @Override
@@ -74,7 +81,7 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
             }
         });
 
-        final Button aufgabeerstellenBtn = (Button) myView.findViewById(R.id.date);
+        final Button aufgabeerstellenBtn = (Button) myView.findViewById(R.id.aufgabeerstellen);
         aufgabeerstellenBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 aufgabename = (EditText) myView.findViewById(R.id.aufgabename);
@@ -86,7 +93,16 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
                 AufgabenDAO database = new AufgabenDAO(getActivity().getApplicationContext());
                 newAufgabe.setAufgabe(aufgabename.getText().toString());
                 newAufgabe.setBeschreibung(beschreibung.getText().toString());
-                newAufgabe.setListe(liste.getSelectedItem().toString());
+                ToDoListDAO db = new ToDoListDAO(getActivity().getApplicationContext());
+                try {
+                    db.open();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                String listName = liste.getSelectedItem().toString();
+                int debug = db.foreignKeyAuslesen(listName);
+                newAufgabe.setListe(db.foreignKeyAuslesen(liste.getSelectedItem().toString()));
+                db.close();
                 newAufgabe.setWichtigkeit(wichtigkeit.getCheckedRadioButtonId());
                 try {
                     database.open();
@@ -95,6 +111,13 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
                 }
                 database.aufgabeerstellen(newAufgabe);
                 database.close();
+                Toast toast = Toast.makeText(getActivity().getApplicationContext(), "Aufgabe wurde erstellt", Toast.LENGTH_SHORT);
+                toast.show();
+                Fragment myFragment = new Listen_Details_Fragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, myFragment)
+                        .commit();
             }
         });
 
@@ -113,13 +136,24 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
     }
 
     private void createSpinner(View view) {
-        Spinner spinner = (Spinner) view.findViewById(R.id.ausgewählteliste);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity().getBaseContext(),
-                R.array.test_array, android.R.layout.simple_spinner_item);
+        List<ToDoList> toDoLists = new ArrayList<ToDoList>();
+        List<String> spinnerelemente = new ArrayList<String>();
+        ToDoListDAO test = new ToDoListDAO(getActivity());
+        try {
+            test.open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        test.getAllListen();
+        toDoLists = test.getAllListen();
+        for (int i = 0; i < toDoLists.size(); i++) {
+            spinnerelemente.add(toDoLists.get(i).getListenname());
+        }
+        test.close();
+        Spinner s = (Spinner) myView.findViewById(R.id.ausgewählteliste);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, spinnerelemente);
+        s.setAdapter(adapter);
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        spinner.setAdapter(adapter);
     }
 
 }

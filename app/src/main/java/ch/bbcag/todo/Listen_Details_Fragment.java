@@ -4,11 +4,9 @@ package ch.bbcag.todo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -45,8 +43,6 @@ public class Listen_Details_Fragment extends Fragment {
     }
 
     private void addAufgabetolist() {
-
-
         ListView list = (ListView) myView.findViewById(R.id.listView);
         ArrayList<Aufgabe> aufgabe = new ArrayList<Aufgabe>();
         Aufgabe test = new Aufgabe();

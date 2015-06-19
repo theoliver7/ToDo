@@ -11,16 +11,18 @@ public class AufgabeSQL {
     public static final String BESCHREIBUNG = "Beschreibung";
     public static final String ERINNERUNGSZEIT = "Erinngerungszeit";
     public static final String WICHTIGKEIT = "Wichtigkeit";
+    public static final String LISTE_ID = "Liste_ID";
 
     public static String getSqlQueryForCreateTableAufgabe() {
         return "CREATE TABLE "
                 + TABLE_AUFGABEN + "(" + KEY_ID + " INTEGER PRIMARY KEY," + AUFGABE_TITEL
                 + " TEXT," + BESCHREIBUNG
-                + " TEXT," + ERINNERUNGSZEIT + " INTEGER," + WICHTIGKEIT + " INTEGER)";
+                + " TEXT," + ERINNERUNGSZEIT + " INTEGER," + WICHTIGKEIT + " INTEGER," + LISTE_ID + " INTEGER)";
     }
 
     public static String getSqlQuerySelectAlleAufgaben() {
         return "SELECT * FROM TABLE "
                 + TABLE_AUFGABEN;
     }
+
 }

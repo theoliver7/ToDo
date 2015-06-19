@@ -18,7 +18,11 @@ public class ToDoListSQL {
     }
 
     public static String getSqlQuerySelectAlleAufgaben() {
-        return "SELECT * FROM TABLE "
+        return "SELECT * FROM  "
                 + TABLE_LISTEN;
+    }
+
+    public static String getSqlQuerySelectForeignKey(String liste) {
+        return "SELECT " + KEY_ID + " FROM " + TABLE_LISTEN + " WHERE " + LISTE_NAME + " = '" + liste + "';";
     }
 }

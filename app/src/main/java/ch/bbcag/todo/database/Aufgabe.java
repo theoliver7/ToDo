@@ -9,15 +9,18 @@ public class Aufgabe {
     private String beschreibung;
     private int erinngerungszeit;
     private int wichtigkeit;
-    private String liste;
 
-    public String getListe() {
+    public int getListe() {
         return liste;
     }
 
-    public void setListe(String liste) {
+    public void setListe(int liste) {
         this.liste = liste;
     }
+
+    private int liste;
+
+
 
 
 
