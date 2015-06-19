@@ -32,6 +32,12 @@ public class Listen_Details_Fragment extends Fragment {
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState){
+        super.onActivityCreated(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
         super.onCreateOptionsMenu(menu, inflater);
@@ -48,29 +54,4 @@ public class Listen_Details_Fragment extends Fragment {
         aufgabe.add(test);
         list.setAdapter(new Ownarrayadapter(this.getActivity().getApplicationContext(), aufgabe, this.getActivity().getLayoutInflater()));
     }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.plus) {
-            Fragment myFragment = null;
-            myFragment = new Aufgaben_erstellen_Fragment();
-
-            // update the main content by replacing fragments
-            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container, myFragment)
-                    .commit();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
-
 }
