@@ -23,6 +23,7 @@ import java.util.Calendar;
  */
 public class Aufgaben_erstellen_Fragment extends Fragment {
     private View myView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -52,7 +53,6 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
         final Button date = (Button) myView.findViewById(R.id.date);
         date.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Perform action on click
                 DatePickerDialog dialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -65,16 +65,18 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
         });
 
         return myView;
+
     }
 
 
     @Override
-    public void onCreateOptionsMenu(Menu menu,  MenuInflater inflater) {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
         super.onCreateOptionsMenu(menu, inflater);
 
         inflater.inflate(R.menu.aufgabe_erstellen_bar, menu);
     }
+
     private void createSpinner(View view) {
         Spinner spinner = (Spinner) view.findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity().getBaseContext(),

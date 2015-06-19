@@ -17,7 +17,7 @@ import android.widget.ListView;
  */
 public class Main_Fragment extends Fragment {
     private View myView;
-    private ArrayAdapter badiliste;
+    private ArrayAdapter todoliste;
 
 
     @Nullable
@@ -30,17 +30,17 @@ public class Main_Fragment extends Fragment {
 
     private void addBadisToList() {
         ListView badis = (ListView) myView.findViewById((R.id.todolisten));
-        badiliste = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1);
-        badiliste.add(getString(R.string.verwalten));
-        badiliste.add(getString(R.string.verwalten));
-        badiliste.add(getString(R.string.verwalten));
-        badiliste.add(getString(R.string.verwalten));
-        badiliste.add(getString(R.string.verwalten));
-        badiliste.add(getString(R.string.verwalten));
-        badiliste.add(getString(R.string.verwalten));
-        badiliste.add(getString(R.string.verwalten));
-        badiliste.add(getString(R.string.verwalten));
-        badis.setAdapter(badiliste);
+        todoliste = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1);
+        todoliste.add(getString(R.string.verwalten));
+        todoliste.add(getString(R.string.verwalten));
+        todoliste.add(getString(R.string.verwalten));
+        todoliste.add(getString(R.string.verwalten));
+        todoliste.add(getString(R.string.verwalten));
+        todoliste.add(getString(R.string.verwalten));
+        todoliste.add(getString(R.string.verwalten));
+        todoliste.add(getString(R.string.verwalten));
+        todoliste.add(getString(R.string.verwalten));
+        badis.setAdapter(todoliste);
     }
 
     @Override
@@ -48,6 +48,6 @@ public class Main_Fragment extends Fragment {
         menu.clear();
         super.onCreateOptionsMenu(menu, inflater);
 
-        inflater.inflate(R.menu.plus_liste, menu);
+        inflater.inflate(R.menu.plus_Liste, menu);
     }
 }

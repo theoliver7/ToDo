@@ -18,12 +18,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/aufgabecheckbox"
-        android:layout_marginEnd="30dp"
+        android:layout_alignWithParentIfMissing="false"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentBottom="false"
-        android:layout_alignParentRight="true"
-        android:layout_alignWithParentIfMissing="false" />
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

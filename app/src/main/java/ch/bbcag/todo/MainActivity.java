@@ -81,7 +81,7 @@ public class MainActivity extends ActionBarActivity
 
         switch (position) {
             case 0:
-                myFragment = new Main_Fragment();
+                myFragment = new Listen_Details_Fragment();
                 break;
             case 1:
                 myFragment = new Aufgaben_erstellen_Fragment();
