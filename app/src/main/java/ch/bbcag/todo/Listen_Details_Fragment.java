@@ -32,7 +32,7 @@ public class Listen_Details_Fragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.plus, menu);
+        inflater.inflate(R.menu.plus_aufgabe, menu);
     }
 
     private void addAufgabetolist() {
