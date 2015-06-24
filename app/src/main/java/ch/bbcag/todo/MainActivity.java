@@ -20,16 +20,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+
+import ch.bbcag.todo.database.ToDoList;
+import ch.bbcag.todo.database.ToDoListDAO;
 
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     ArrayAdapter toDoListen;
-
+    EditText neueListennname;
     ArrayList<String> listItems = new ArrayList<String>();
 
     //DEFINING A STRING ADAPTER WHICH WILL HANDLE THE DATA OF THE LISTVIEW
@@ -65,6 +70,7 @@ public class MainActivity extends ActionBarActivity
 
         ;
 
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.burger);
     }
 
 
@@ -81,7 +87,6 @@ public class MainActivity extends ActionBarActivity
 //    }
 
 
-
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         Fragment myFragment = null;
@@ -95,7 +100,6 @@ public class MainActivity extends ActionBarActivity
                 break;
 
         }
-
 
 
         // update the main content by replacing fragments
@@ -149,7 +153,28 @@ public class MainActivity extends ActionBarActivity
             alert.setPositiveButton("Erstellen", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
 
-                    // Do something with value!
+                    ToDoList newList = new ToDoList();
+                    ToDoListDAO database = new ToDoListDAO(getApplicationContext());
+                    newList.setListenname(input.getText().toString());
+
+                    try {
+                        database.open();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    database.listeerstellen(newList);
+                    database.close();
+
+                    Fragment myFragment = new Main_Fragment();
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.container, myFragment)
+                            .commit();
+                    Toast toast = Toast.makeText(getApplicationContext(), "Neue Liste wurde erstellt", Toast.LENGTH_SHORT);
+                    toast.show();
+
+
+
                 }
             });
             alert.setNeutralButton("Favoriten", new DialogInterface.OnClickListener() {
@@ -160,6 +185,7 @@ public class MainActivity extends ActionBarActivity
 
             alert.setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
+
                     // Canceled.
                 }
             });

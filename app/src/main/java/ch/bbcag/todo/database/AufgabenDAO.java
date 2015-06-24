@@ -22,8 +22,10 @@ public class AufgabenDAO extends DatabaseDAO {
         values.put(AufgabeSQL.BESCHREIBUNG, aufgabe.getBeschreibung());
         values.put(AufgabeSQL.ERINNERUNGSZEIT, aufgabe.getErinngerungszeit());
         values.put(AufgabeSQL.WICHTIGKEIT, aufgabe.getWichtigkeit());
+        values.put(AufgabeSQL.LISTE_ID, aufgabe.getListe());
         // insert row
         long todo_id = db.insert(AufgabeSQL.TABLE_AUFGABEN, null, values);
         return todo_id;
     }
+
 }
