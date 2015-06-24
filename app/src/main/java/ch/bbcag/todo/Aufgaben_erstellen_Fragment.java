@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -59,7 +60,7 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
         setHasOptionsMenu(true);
 
         final Button time = (Button) myView.findViewById(R.id.time);
-        time.setText("" + calendar.get(Calendar.HOUR)+ ":" +calendar.get(Calendar.MINUTE));
+        time.setText("" + calendar.get(Calendar.HOUR_OF_DAY)+ ":" +calendar.get(Calendar.MINUTE));
         time.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
@@ -71,7 +72,7 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
                         hour = hourOfDay;
                         minute = minute_;
                     }
-                }, calendar.get(Calendar.HOUR), calendar.get(Calendar.MINUTE), true);
+                }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
 
                // Calendar.HOUR_OF_DAY, Calendar.MINUTE, true);
                 mTimePicker.setTitle("Zeit auswählen");
@@ -80,7 +81,7 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
         });
 
         final Button date = (Button) myView.findViewById(R.id.date);
-        date.setText("" + calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.MONTH) + "/" + calendar.get(Calendar.YEAR));
+        date.setText("" + calendar.get(Calendar.DAY_OF_MONTH) + "/" + (calendar.get(Calendar.MONTH)+1) + "/" + calendar.get(Calendar.YEAR));
         date.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -103,13 +104,7 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
             @Override
             public void onClick(View v) {
                setAlert();
-                Toast.makeText(getActivity().getApplicationContext(), "Alarm wurde gesetzt",
-                        Toast.LENGTH_LONG).show();            }
-        });
-        final Button aufgabeerstellenBtn = (Button) myView.findViewById(R.id.aufgabeerstellen);
-        aufgabeerstellenBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                aufgabename = (EditText) myView.findViewById(R.id.aufgabename);
+               /* aufgabename = (EditText) myView.findViewById(R.id.aufgabename);
                 beschreibung = (EditText) myView.findViewById(R.id.aufgabebeschreibung);
                 liste = (Spinner) myView.findViewById(R.id.ausgewählteliste);
                 wichtigkeit = (RadioGroup) myView.findViewById(R.id.wichtigkeit);
@@ -142,12 +137,11 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, myFragment)
-                        .commit();
-            }
+                        .commit();*/
+
+                Toast.makeText(getActivity().getApplicationContext(), "Alarm wurde gesetzt",
+                        Toast.LENGTH_LONG).show();            }
         });
-
-
-        return myView;
 
         return myView;
     }
@@ -203,7 +197,7 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        spinner.setAdapter(adapter);
+        s.setAdapter(adapter);
     }
 
 

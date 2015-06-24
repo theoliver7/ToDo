@@ -14,8 +14,10 @@
         android:id="@+id/ausgewählteliste"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
-        android:layout_alignStart="@+id/textView" />
+        android:layout_alignStart="@+id/date"
+        android:spinnerMode="dropdown"
+        android:layout_above="@+id/textView5"
+        android:paddingBottom="5dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -24,7 +26,8 @@
         android:text="Liste Auswählen"
         android:id="@+id/textView"
         android:layout_below="@+id/aufgabebeschreibung"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="-5dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -81,7 +84,7 @@
         android:text="Wichtigkeit"
         android:id="@+id/textView6"
 
-        android:layout_above="@+id/wichtigkeit"
+        android:layout_below="@+id/date"
         android:layout_alignParentStart="true" />
 
     <Button
@@ -99,8 +102,9 @@
         android:layout_height="wrap_content"
         android:text="26/07/2015"
         android:id="@+id/date"
-        android:layout_above="@+id/textView6"
-        android:layout_alignStart="@+id/aufgabebeschreibung" />
+        android:layout_below="@+id/textView5"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="10dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -110,8 +114,8 @@
         android:paddingRight="8dp"
         android:paddingLeft="8dp"
         android:onClick="showTimePickerDialog"
-        android:layout_above="@+id/textView6"
-        android:layout_toEndOf="@+id/textView2" />
+        android:layout_below="@+id/textView5"
+        android:layout_alignStart="@+id/aufgabeerstellen" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -119,7 +123,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Alarm setzen"
         android:id="@+id/textView5"
-        android:layout_above="@+id/date"
+        android:layout_centerVertical="true"
         android:layout_alignParentStart="true" />
 
     <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
@@ -129,42 +133,43 @@
         android:layout_alignStart="@+id/date"
         android:id="@+id/wichtigkeit">
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Wichtig"
-            android:id="@+id/radioButton2"
-            android:checked="false"
-            android:layout_above="@+id/radioButton3"
-            android:layout_alignParentStart="true" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Normal"
-            android:id="@+id/radioButton3"
-            android:checked="false"
-            android:layout_above="@+id/radioButton4"
-            android:layout_alignParentStart="true" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Unwichtig"
-            android:id="@+id/radioButton4"
-            android:checked="false"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sehr wichtig"
-            android:id="@+id/radioButton"
-            android:checked="false"
-            android:layout_above="@+id/radioButton2"
-            android:layout_alignParentStart="true" />
-
     </RadioGroup>
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wichtig"
+        android:id="@+id/radioButton2"
+        android:checked="false"
+        android:layout_below="@+id/radioButton"
+        android:layout_alignParentStart="true" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Normal"
+        android:id="@+id/radioButton3"
+        android:checked="false"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/radioButton2"
+        android:layout_alignParentLeft="true" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Unwichtig"
+        android:id="@+id/radioButton4"
+        android:checked="false"
+        android:layout_below="@+id/radioButton3"
+        android:layout_alignParentStart="true" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sehr wichtig"
+        android:id="@+id/radioButton"
+        android:checked="false"
+        android:layout_below="@+id/textView6"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

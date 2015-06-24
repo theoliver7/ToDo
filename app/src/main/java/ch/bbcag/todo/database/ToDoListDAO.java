@@ -41,8 +41,8 @@ public class ToDoListDAO extends DatabaseDAO {
         return toDoLists;
     }
 
-    public long foreignKeyAuslesen(String liste) {
+   /* public long foreignKeyAuslesen(String liste) {
         db.rawQuery(ToDoListSQL.getSqlQuerySelectForeignKey(liste), null);
         return
-    }
+    }*/
 }
