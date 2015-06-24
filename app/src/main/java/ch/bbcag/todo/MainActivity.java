@@ -1,8 +1,12 @@
 package ch.bbcag.todo;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,12 +18,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 import ch.bbcag.todo.database.ToDoList;
 import ch.bbcag.todo.database.ToDoListDAO;
@@ -48,10 +54,12 @@ public class MainActivity extends ActionBarActivity
     private CharSequence mTitle;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 //        addListenToList();
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -63,6 +71,7 @@ public class MainActivity extends ActionBarActivity
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
         ;
+
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.burger);
     }
 
@@ -102,18 +111,7 @@ public class MainActivity extends ActionBarActivity
                 .commit();
     }
 
-    /**
-     * public void onSectionAttached(int number) {
-     * switch (number) {
-     * case 1:
-     * mTitle = getString(R.string.title_section1);
-     * break;
-     * case 2:
-     * mTitle = getString(R.string.title_section2);
-     * break;
-     * }
-     * }
-     */
+
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
@@ -251,4 +249,5 @@ public class MainActivity extends ActionBarActivity
 
 
     }
+
 }
