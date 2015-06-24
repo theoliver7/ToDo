@@ -97,9 +97,9 @@ public class MainActivity extends ActionBarActivity
             case 0:
                 myFragment = new Main_Fragment();
                 break;
-            case 1:
-                myFragment = new Listen_Details_Fragment();
-                break;
+//            case 1:
+//                myFragment = new Listen_Details_Fragment();
+//                break;
 
         }
 

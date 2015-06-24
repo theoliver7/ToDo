@@ -119,21 +119,22 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-                String listName = liste.getSelectedItem().toString();
-                int debug = db.foreignKeyAuslesen(listName);
-                newAufgabe.setListe(db.foreignKeyAuslesen(liste.getSelectedItem().toString()));
-                db.close();
+                newAufgabe.setListe(db.primaryKeyAuslesen(liste.getSelectedItem().toString()));
                 newAufgabe.setWichtigkeit(wichtigkeit.getCheckedRadioButtonId());
-                try {
-                    database.open();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+
                 database.aufgabeerstellen(newAufgabe);
-                database.close();
+
+
+                db.close();
                 Toast toast = Toast.makeText(getActivity().getApplicationContext(), "Aufgabe wurde erstellt", Toast.LENGTH_SHORT);
                 toast.show();
+
+
+                Bundle bundle = new Bundle();
+                bundle.putString("Liste", liste.getSelectedItem().toString());
                 Fragment myFragment = new Listen_Details_Fragment();
+                myFragment.setArguments(bundle);
+                // update the main content by replacing fragments
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, myFragment)

@@ -21,8 +21,13 @@ public class AufgabeSQL {
     }
 
     public static String getSqlQuerySelectAlleAufgaben() {
-        return "SELECT * FROM TABLE "
+        return "SELECT * FROM  "
                 + TABLE_AUFGABEN;
+    }
+
+    public static String getSqlQuerySelectAlleAufgabenFromListe() {
+        return "SELECT " + AUFGABE_TITEL + " FROM  "
+                + TABLE_AUFGABEN + " WHERE " + LISTE_ID + " = ";
     }
 
 }

@@ -9,27 +9,23 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import ch.bbcag.todo.database.Aufgabe;
-
 /**
  * Created by zfehrn on 17.06.2015.
  */
-public class Ownarrayadapter extends ArrayAdapter<Aufgabe> {
+public class Ownarrayadapter extends ArrayAdapter<String> {
 
     LayoutInflater mInflater;
-    private List<Aufgabe> mItems;
 
-    public Ownarrayadapter(Context context, List<Aufgabe> items, LayoutInflater inflater) {
+    public Ownarrayadapter(Context context, List<String> items, LayoutInflater inflater) {
         super(context, -1, items);
-        this.mItems = items;
         this.mInflater = inflater;
     }
 
     public View getView(int pos, View convertView, ViewGroup parent) {
         convertView = mInflater.inflate(R.layout.aufgabenlistview_layout, null);
-        final Aufgabe aufgabe = (Aufgabe) mItems.get(pos);
+        final String aufgabe = this.getItem(pos);
 
-        ((TextView) convertView.findViewById(R.id.aufgabe)).setText(aufgabe.getAufgabe());
+        ((TextView) convertView.findViewById(R.id.aufgabe)).setText(aufgabe);
         return convertView;
     }
 }

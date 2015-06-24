@@ -4,6 +4,7 @@ package ch.bbcag.todo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,28 +40,31 @@ public class Main_Fragment extends Fragment {
         todoliste = (ListView) myView.findViewById(R.id.todolisten);
         List<ToDoList> toDoLists = new ArrayList<ToDoList>();
         todolisteadapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1);
-        ToDoListDAO test = new ToDoListDAO(getActivity());
-        try {
-            test.open();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        test.getAllListen();
-        toDoLists = test.getAllListen();
+        ToDoListDAO db = new ToDoListDAO(getActivity());
+        db.getAllListen();
+        toDoLists = db.getAllListen();
         for (int i = 0; i < toDoLists.size(); i++) {
             todolisteadapter.add(toDoLists.get(i).getListenname());
         }
         todoliste.setAdapter(todolisteadapter);
-        test.close();
 
-        AdapterView.OnItemClickListener listenlistener = new AdapterView.OnItemClickListener() {
+
+        todoliste.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long l) {
-                String selected = parent.getItemAtPosition(position).toString();
-
+                String selectedFromList = (String) (todoliste.getItemAtPosition(position));
+                Bundle bundle = new Bundle();
+                bundle.putString("Liste", selectedFromList);
+                Fragment myFragment = new Listen_Details_Fragment();
+                myFragment.setArguments(bundle);
+                // update the main content by replacing fragments
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, myFragment)
+                        .commit();
 
             }
-        };
+        });
 
 
 

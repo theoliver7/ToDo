@@ -2,6 +2,10 @@ package ch.bbcag.todo.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Created by zascho on 17.06.2015.
@@ -17,15 +21,34 @@ public class AufgabenDAO extends DatabaseDAO {
       * Creating a todo
       */
     public long aufgabeerstellen(Aufgabe aufgabe) {
+        try {
+            open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         ContentValues values = new ContentValues();
         values.put(AufgabeSQL.AUFGABE_TITEL, aufgabe.getAufgabe());
         values.put(AufgabeSQL.BESCHREIBUNG, aufgabe.getBeschreibung());
         values.put(AufgabeSQL.ERINNERUNGSZEIT, aufgabe.getErinngerungszeit());
         values.put(AufgabeSQL.WICHTIGKEIT, aufgabe.getWichtigkeit());
         values.put(AufgabeSQL.LISTE_ID, aufgabe.getListe());
-        // insert row
         long todo_id = db.insert(AufgabeSQL.TABLE_AUFGABEN, null, values);
         return todo_id;
+    }
+
+    public ArrayList<String> getAlleAufgabenfromList(long foreignkey) {
+        try {
+            open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ArrayList aufgabenvonListe = new ArrayList<String>();
+        Cursor cursor = db.rawQuery(AufgabeSQL.getSqlQuerySelectAlleAufgabenFromListe() + foreignkey, null);
+        while (cursor.moveToNext()) {
+            aufgabenvonListe.add(cursor.getString(0).toString());
+        }
+        close();
+        return aufgabenvonListe;
     }
 
 }

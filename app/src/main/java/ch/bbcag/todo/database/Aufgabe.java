@@ -10,15 +10,15 @@ public class Aufgabe {
     private int erinngerungszeit;
     private int wichtigkeit;
 
-    public int getListe() {
+    public long getListe() {
         return liste;
     }
 
-    public void setListe(int liste) {
+    public void setListe(long liste) {
         this.liste = liste;
     }
 
-    private int liste;
+    private long liste;
 
 
 

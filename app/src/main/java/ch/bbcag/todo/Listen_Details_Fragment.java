@@ -14,11 +14,13 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-import ch.bbcag.todo.database.Aufgabe;
+import ch.bbcag.todo.database.AufgabenDAO;
+import ch.bbcag.todo.database.ToDoListDAO;
 
 /**
  * Created by zascho on 17.06.2015.
@@ -30,8 +32,11 @@ public class Listen_Details_Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.listen_details_layout, container, false);
-        addAufgabetolist();
-
+        AufgabenDAO aufgabenTitel = new AufgabenDAO(getActivity());
+        ToDoListDAO foreignkey = new ToDoListDAO(getActivity());
+        addAufgabetolist(aufgabenTitel.getAlleAufgabenfromList(foreignkey.primaryKeyAuslesen(getListentitel())));
+        TextView listennametextview = (TextView) myView.findViewById(R.id.Listenname);
+        listennametextview.setText(getListentitel());
         return myView;
     }
 
@@ -48,12 +53,15 @@ public class Listen_Details_Fragment extends Fragment {
         inflater.inflate(R.menu.plus_aufgabe, menu);
     }
 
-    private void addAufgabetolist() {
+    private void addAufgabetolist(ArrayList aufgabenTitel) {
         ListView list = (ListView) myView.findViewById(R.id.listView);
-        ArrayList<Aufgabe> aufgabe = new ArrayList<Aufgabe>();
-        Aufgabe test = new Aufgabe();
-        test.setAufgabe("hello");
-        aufgabe.add(test);
-        list.setAdapter(new Ownarrayadapter(this.getActivity().getApplicationContext(), aufgabe, this.getActivity().getLayoutInflater()));
+        Ownarrayadapter ownarrayadapter = new Ownarrayadapter(this.getActivity().getApplicationContext(), aufgabenTitel, this.getActivity().getLayoutInflater());
+        list.setAdapter(ownarrayadapter);
+    }
+
+    private String getListentitel() {
+        Bundle bundle = this.getArguments();
+        String listenname = bundle.getString("Liste");
+        return listenname;
     }
 }

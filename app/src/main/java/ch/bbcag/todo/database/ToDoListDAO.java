@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,22 +28,36 @@ public class ToDoListDAO extends DatabaseDAO {
     }
 
     public List<ToDoList> getAllListen() {
+        try {
+            open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         List<ToDoList> toDoLists = new ArrayList<ToDoList>();
         String selectQuery = "SELECT  Listenname FROM " + ToDoListSQL.TABLE_LISTEN;
 
         Cursor cursor = db.query(ToDoListSQL.TABLE_LISTEN, new String[]{"Listenname"}, null, null, null, null, null, null);
         //Cursor cursor = db.rawQuery(selectQuery,null);
-        Log.e("Hello", cursor.toString());
         while (cursor.moveToNext()) {
             ToDoList toDoList = new ToDoList();
             toDoList.setListenname(cursor.getString(0));
             toDoLists.add(toDoList);
         }
+        close();
         return toDoLists;
     }
 
-   /* public long foreignKeyAuslesen(String liste) {
-        db.rawQuery(ToDoListSQL.getSqlQuerySelectForeignKey(liste), null);
-        return
-    }*/
+    public int primaryKeyAuslesen(String liste) {
+        int primaryKey = 0;
+        try {
+            open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Cursor cursor = db.rawQuery(ToDoListSQL.getSqlQuerySelectForeignKey(liste), null);
+        cursor.moveToFirst();
+        primaryKey = cursor.getInt(0);
+        close();
+        return primaryKey;
+    }
 }
