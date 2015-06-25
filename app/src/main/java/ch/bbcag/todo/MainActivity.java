@@ -1,12 +1,8 @@
 package ch.bbcag.todo;
 
 import android.app.Activity;
-import android.app.AlarmManager;
 import android.app.AlertDialog;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -25,7 +21,6 @@ import android.widget.Toast;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 
 import ch.bbcag.todo.database.ToDoList;
 import ch.bbcag.todo.database.ToDoListDAO;
@@ -97,9 +92,9 @@ public class MainActivity extends ActionBarActivity
             case 0:
                 myFragment = new Main_Fragment();
                 break;
-//            case 1:
-//                myFragment = new Listen_Details_Fragment();
-//                break;
+            case 1:
+                myFragment = new AufgabeAnsicht_Fragment();
+                break;
 
         }
 

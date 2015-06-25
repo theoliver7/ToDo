@@ -1,10 +1,6 @@
 package ch.bbcag.todo;
 
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,7 +13,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 
 import ch.bbcag.todo.database.AufgabenDAO;
 import ch.bbcag.todo.database.ToDoListDAO;
@@ -57,6 +52,24 @@ public class Listen_Details_Fragment extends Fragment {
         ListView list = (ListView) myView.findViewById(R.id.listView);
         Ownarrayadapter ownarrayadapter = new Ownarrayadapter(this.getActivity().getApplicationContext(), aufgabenTitel, this.getActivity().getLayoutInflater());
         list.setAdapter(ownarrayadapter);
+
+//        ListView aufgabenListe=(ListView)myView.findViewById(R.id.)
+//        aufgabenListe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long l) {
+//                String selectedFromList = (String) (todoliste.getItemAtPosition(position));
+//                Bundle bundle = new Bundle();
+//                bundle.putString("Liste", selectedFromList);
+//                Fragment myFragment = new Listen_Details_Fragment();
+//                myFragment.setArguments(bundle);
+//                // update the main content by replacing fragments
+//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//                fragmentManager.beginTransaction()
+//                        .replace(R.id.container, myFragment)
+//                        .commit();
+//
+//            }
+//        });
     }
 
     private String getListentitel() {
@@ -64,4 +77,5 @@ public class Listen_Details_Fragment extends Fragment {
         String listenname = bundle.getString("Liste");
         return listenname;
     }
+
 }

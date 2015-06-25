@@ -20,14 +20,17 @@ public class AufgabeSQL {
                 + " TEXT," + ERINNERUNGSZEIT + " INTEGER," + WICHTIGKEIT + " INTEGER," + LISTE_ID + " INTEGER)";
     }
 
-    public static String getSqlQuerySelectAlleAufgaben() {
-        return "SELECT * FROM  "
-                + TABLE_AUFGABEN;
-    }
 
     public static String getSqlQuerySelectAlleAufgabenFromListe() {
         return "SELECT " + AUFGABE_TITEL + " FROM  "
                 + TABLE_AUFGABEN + " WHERE " + LISTE_ID + " = ";
     }
 
+    public static String getSqlQuerySelectAllInformationForAufgabe() {
+        return "SELECT * FROM " + TABLE_AUFGABEN + " WHERE " + AUFGABE_TITEL + " =";
+    }
+
+    public static String getSqlQueryDeleteAufgabe() {
+        return "DELETE FROM " + TABLE_AUFGABEN + " WHERE " + AUFGABE_TITEL + " =";
+    }
 }

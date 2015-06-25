@@ -51,4 +51,32 @@ public class AufgabenDAO extends DatabaseDAO {
         return aufgabenvonListe;
     }
 
+    public Aufgabe getAllInformationForTask(String aufgabenTitel) {
+        try {
+            open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Cursor cursor = db.rawQuery(AufgabeSQL.getSqlQuerySelectAllInformationForAufgabe() + aufgabenTitel, null);
+        Aufgabe aufgabe = new Aufgabe();
+        while (cursor.moveToNext()) {
+            aufgabe.setAufgabe(cursor.getString(1));
+            aufgabe.setBeschreibung(cursor.getString(2));
+            aufgabe.setWichtigkeit(cursor.getInt(3));
+        }
+        close();
+        return aufgabe;
+    }
+
+    public void deleteAufgabe(String aufgabenTitel) {
+        try {
+            open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        db.rawQuery(AufgabeSQL.getSqlQueryDeleteAufgabe() + aufgabenTitel, null);
+        close();
+
+    }
+
 }

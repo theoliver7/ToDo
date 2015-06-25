@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,7 +27,6 @@ import android.widget.Toast;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import ch.bbcag.todo.database.Aufgabe;
@@ -51,6 +49,7 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
     final Calendar calendar = Calendar.getInstance();
 
     final static int RQS_1 = 1;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -60,7 +59,7 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
         setHasOptionsMenu(true);
 
         final Button time = (Button) myView.findViewById(R.id.time);
-        time.setText("" + calendar.get(Calendar.HOUR_OF_DAY)+ ":" +calendar.get(Calendar.MINUTE));
+        time.setText("" + calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE));
         time.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
@@ -74,14 +73,14 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
                     }
                 }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
 
-               // Calendar.HOUR_OF_DAY, Calendar.MINUTE, true);
+                // Calendar.HOUR_OF_DAY, Calendar.MINUTE, true);
                 mTimePicker.setTitle("Zeit auswählen");
                 mTimePicker.show();
             }
         });
 
         final Button date = (Button) myView.findViewById(R.id.date);
-        date.setText("" + calendar.get(Calendar.DAY_OF_MONTH) + "/" + (calendar.get(Calendar.MONTH)+1) + "/" + calendar.get(Calendar.YEAR));
+        date.setText("" + calendar.get(Calendar.DAY_OF_MONTH) + "/" + (calendar.get(Calendar.MONTH) + 1) + "/" + calendar.get(Calendar.YEAR));
         date.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -93,18 +92,18 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
                         month = monthOfYear;
                         year = year_;
                     }
-                },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
                 dialog.setTitle("Datum auswählen");
                 dialog.show();
             }
         });
-        final Button alarmSetzen =  (Button) myView.findViewById(R.id.aufgabeerstellen);
+        final Button alarmSetzen = (Button) myView.findViewById(R.id.aufgabeerstellen);
         alarmSetzen.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-               setAlert();
-               /* aufgabename = (EditText) myView.findViewById(R.id.aufgabename);
+                setAlert();
+                aufgabename = (EditText) myView.findViewById(R.id.aufgabename);
                 beschreibung = (EditText) myView.findViewById(R.id.aufgabebeschreibung);
                 liste = (Spinner) myView.findViewById(R.id.ausgewählteliste);
                 wichtigkeit = (RadioGroup) myView.findViewById(R.id.wichtigkeit);
@@ -138,10 +137,11 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, myFragment)
-                        .commit();*/
+                        .commit();
 
                 Toast.makeText(getActivity().getApplicationContext(), "Alarm wurde gesetzt",
-                        Toast.LENGTH_LONG).show();            }
+                        Toast.LENGTH_LONG).show();
+            }
         });
 
         return myView;
@@ -149,25 +149,27 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
 
     public long getTime(int year, int month, int day, int hour, int minute) {
         Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.MINUTE,minute);
-        cal.set(Calendar.HOUR_OF_DAY,hour);
-        cal.set(Calendar.DAY_OF_MONTH,day);
-        cal.set(Calendar.MONTH,month);
-        cal.set(Calendar.YEAR,year);
+        cal.set(Calendar.MINUTE, minute);
+        cal.set(Calendar.HOUR_OF_DAY, hour);
+        cal.set(Calendar.DAY_OF_MONTH, day);
+        cal.set(Calendar.MONTH, month);
+        cal.set(Calendar.YEAR, year);
 
         long difference = cal.getTimeInMillis() - Calendar.getInstance().getTimeInMillis();
         return difference;
     }
-    public void setAlert(){
-        long test = getTime(this.year, this.month,this.day,this.hour,this.minute);
+
+    public void setAlert() {
+        long test = getTime(this.year, this.month, this.day, this.hour, this.minute);
         Intent intent = new Intent(getActivity(), AlertReceiver.class);
-        int id_ =(int) System.currentTimeMillis();
+        int id_ = (int) System.currentTimeMillis();
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 getActivity().getApplicationContext(), id_, intent, 0);
         AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()
                 + test, pendingIntent);
     }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
@@ -200,7 +202,6 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
 
         s.setAdapter(adapter);
     }
-
 
 
 }
