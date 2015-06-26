@@ -1,4 +1,4 @@
-package ch.bbcag.todo;
+package ch.bbcag.todo.Alarm;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -8,6 +8,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
+
+import ch.bbcag.todo.MainActivity;
+import ch.bbcag.todo.R;
 
 /**
  * Created by zjorgm on 19.06.2015.

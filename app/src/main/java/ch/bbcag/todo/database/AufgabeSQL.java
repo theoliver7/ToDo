@@ -9,7 +9,7 @@ public class AufgabeSQL {
     // AUFGABEN Table - column nmaes
     public static final String AUFGABE_TITEL = "Titel";
     public static final String BESCHREIBUNG = "Beschreibung";
-    public static final String ERINNERUNGSZEIT = "Erinngerungszeit";
+    public static final String BILD_URI = "Bild";
     public static final String WICHTIGKEIT = "Wichtigkeit";
     public static final String LISTE_ID = "Liste_ID";
 
@@ -17,7 +17,7 @@ public class AufgabeSQL {
         return "CREATE TABLE "
                 + TABLE_AUFGABEN + "(" + KEY_ID + " INTEGER PRIMARY KEY," + AUFGABE_TITEL
                 + " TEXT," + BESCHREIBUNG
-                + " TEXT," + ERINNERUNGSZEIT + " INTEGER," + WICHTIGKEIT + " INTEGER," + LISTE_ID + " INTEGER)";
+                + " TEXT," + BILD_URI + " TEXT," + WICHTIGKEIT + " INTEGER," + LISTE_ID + " INTEGER)";
     }
 
 

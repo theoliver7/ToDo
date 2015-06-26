@@ -22,7 +22,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
         // creating required tables
         db.execSQL(AufgabeSQL.getSqlQueryForCreateTableAufgabe());
         db.execSQL(ToDoListSQL.getSqlQueryForCreateTableToDoList());
-//        db.execSQL(CREATE_TABLE_TODO_TAG);
     }
 
 

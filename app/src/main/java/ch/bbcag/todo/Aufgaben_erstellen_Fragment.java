@@ -1,11 +1,7 @@
 package ch.bbcag.todo;
 
-import android.app.AlarmManager;
 import android.app.DatePickerDialog;
-import android.app.PendingIntent;
 import android.app.TimePickerDialog;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -29,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import ch.bbcag.todo.Alarm.AlarmSetter;
 import ch.bbcag.todo.database.Aufgabe;
 import ch.bbcag.todo.database.AufgabenDAO;
 import ch.bbcag.todo.database.ToDoList;
@@ -44,11 +42,12 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
     private Spinner liste;
     private RadioGroup wichtigkeit;
     private String[] arraySpinner;
-    int i = 5;
-    int minute, hour, day, month, year;
-    final Calendar calendar = Calendar.getInstance();
+    private int minute, hour, day, month, year;
+    private final Calendar calendar = Calendar.getInstance();
+    private Camera camera = new Camera();
 
-    final static int RQS_1 = 1;
+
+    private final static int RQS_1 = 1;
 
     @Nullable
     @Override
@@ -102,7 +101,9 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                setAlert();
+                AlarmSetter alarm = new AlarmSetter( getActivity());
+                alarm.setAlert(getTime(year, month,day, hour, minute));
+
                 aufgabename = (EditText) myView.findViewById(R.id.aufgabename);
                 beschreibung = (EditText) myView.findViewById(R.id.aufgabebeschreibung);
                 liste = (Spinner) myView.findViewById(R.id.ausgewählteliste);
@@ -112,6 +113,7 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
                 AufgabenDAO database = new AufgabenDAO(getActivity().getApplicationContext());
                 newAufgabe.setAufgabe(aufgabename.getText().toString());
                 newAufgabe.setBeschreibung(beschreibung.getText().toString());
+                newAufgabe.setBild_uri(camera.getUriSavedImage());
                 ToDoListDAO db = new ToDoListDAO(getActivity().getApplicationContext());
                 try {
                     db.open();
@@ -120,10 +122,7 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
                 }
                 newAufgabe.setListe(db.primaryKeyAuslesen(liste.getSelectedItem().toString()));
                 newAufgabe.setWichtigkeit(wichtigkeit.getCheckedRadioButtonId());
-
                 database.aufgabeerstellen(newAufgabe);
-
-
                 db.close();
                 Toast toast = Toast.makeText(getActivity().getApplicationContext(), "Aufgabe wurde erstellt", Toast.LENGTH_SHORT);
                 toast.show();
@@ -147,6 +146,14 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
         return myView;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        camera.createCamera(this.getActivity());
+
+        return super.onOptionsItemSelected(item);
+    }
+
     public long getTime(int year, int month, int day, int hour, int minute) {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.MINUTE, minute);
@@ -157,17 +164,6 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
 
         long difference = cal.getTimeInMillis() - Calendar.getInstance().getTimeInMillis();
         return difference;
-    }
-
-    public void setAlert() {
-        long test = getTime(this.year, this.month, this.day, this.hour, this.minute);
-        Intent intent = new Intent(getActivity(), AlertReceiver.class);
-        int id_ = (int) System.currentTimeMillis();
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                getActivity().getApplicationContext(), id_, intent, 0);
-        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()
-                + test, pendingIntent);
     }
 
     @Override

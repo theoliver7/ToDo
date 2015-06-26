@@ -12,11 +12,11 @@ import java.util.List;
 /**
  * Created by zfehrn on 17.06.2015.
  */
-public class Ownarrayadapter extends ArrayAdapter<String> {
+public class OwnArrayAdapter extends ArrayAdapter<String> {
 
     LayoutInflater mInflater;
 
-    public Ownarrayadapter(Context context, List<String> items, LayoutInflater inflater) {
+    public OwnArrayAdapter(Context context, List<String> items, LayoutInflater inflater) {
         super(context, -1, items);
         this.mInflater = inflater;
     }

@@ -9,6 +9,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="verwalten">Verwaltung</string>
 
+
+    <string name="bild_hinzufuegen">Bild hinzufügen</string>
+
     <string name="action_settings">Neue Liste</string>
     <string name="burger">burger</string>
 

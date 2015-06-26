@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -28,7 +29,7 @@ public class AufgabeAnsicht_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.aufgabe_layout, container, false);
         AufgabenDAO aufgabenDAO = new AufgabenDAO(getActivity());
-        informationenSetzen(aufgabenDAO.getAllInformationForTask("86"));
+        informationenSetzen(aufgabenDAO.getAllInformationForTask("Peter"));
         return myView;
     }
 
@@ -48,9 +49,10 @@ public class AufgabeAnsicht_Fragment extends Fragment {
     public void informationenSetzen(Aufgabe aufgabe) {
         final TextView titel = (TextView) myView.findViewById(R.id.aufgabentitel);
         TextView beschreibung = (TextView) myView.findViewById(R.id.detailAnsichtBeschreibung);
+        ImageView bild = (ImageView) myView.findViewById(R.id.imageView);
         titel.setText(aufgabe.getAufgabe());
         beschreibung.setText(aufgabe.getBeschreibung());
-
+        bild.setImageURI(aufgabe.getBild_uri());
         CheckBox checkBox = (CheckBox) myView.findViewById(R.id.taskbeenden);
         checkBox.setOnClickListener(new View.OnClickListener() {
                                         @Override

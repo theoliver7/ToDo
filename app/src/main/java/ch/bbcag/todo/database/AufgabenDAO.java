@@ -3,6 +3,8 @@ package ch.bbcag.todo.database;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
+import android.util.Log;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -29,7 +31,7 @@ public class AufgabenDAO extends DatabaseDAO {
         ContentValues values = new ContentValues();
         values.put(AufgabeSQL.AUFGABE_TITEL, aufgabe.getAufgabe());
         values.put(AufgabeSQL.BESCHREIBUNG, aufgabe.getBeschreibung());
-        values.put(AufgabeSQL.ERINNERUNGSZEIT, aufgabe.getErinngerungszeit());
+       //     values.put(AufgabeSQL.BILD_URI, aufgabe.getBild_uri().toString());
         values.put(AufgabeSQL.WICHTIGKEIT, aufgabe.getWichtigkeit());
         values.put(AufgabeSQL.LISTE_ID, aufgabe.getListe());
         long todo_id = db.insert(AufgabeSQL.TABLE_AUFGABEN, null, values);
@@ -62,8 +64,10 @@ public class AufgabenDAO extends DatabaseDAO {
         while (cursor.moveToNext()) {
             aufgabe.setAufgabe(cursor.getString(1));
             aufgabe.setBeschreibung(cursor.getString(2));
-            aufgabe.setWichtigkeit(cursor.getInt(3));
+            aufgabe.setBild_uri(Uri.parse(cursor.getString(3)));
+            aufgabe.setWichtigkeit(cursor.getInt(4));
         }
+
         close();
         return aufgabe;
     }

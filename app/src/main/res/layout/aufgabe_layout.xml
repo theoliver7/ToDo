@@ -17,7 +17,7 @@
         android:text="Titel"
         android:id="@+id/aufgabentitel"
         android:layout_marginStart="26dp"
-        android:layout_below="@+id/imageView"
+        android:layout_below="@id/imageView"
         android:layout_alignParentStart="true"
         android:layout_marginTop="20dp" />
 
@@ -28,8 +28,8 @@
         android:text="Beschreibung"
         android:id="@+id/detailAnsichtBeschreibung"
         android:layout_marginTop="27dp"
-        android:layout_below="@+id/aufgabentitel"
-        android:layout_alignStart="@+id/aufgabentitel" />
+        android:layout_below="@id/aufgabentitel"
+        android:layout_alignStart="@id/aufgabentitel" />
 
     <CheckBox
         android:layout_width="wrap_content"
