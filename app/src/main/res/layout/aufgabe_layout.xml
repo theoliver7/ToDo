@@ -31,25 +31,32 @@
         android:layout_below="@id/aufgabentitel"
         android:layout_alignStart="@id/aufgabentitel" />
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/taskbeenden"
-        android:checked="false"
-        android:text="Finish?"
-        android:layout_marginRight="5dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="5dp" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="wichtigkeit"
         android:id="@+id/wichtigkeitText"
+        android:layout_marginTop="53dp"
         android:layout_below="@+id/detailAnsichtBeschreibung"
-        android:layout_alignStart="@+id/detailAnsichtBeschreibung"
-        android:layout_marginTop="46dp" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="71dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Wichtigkeit:"
+        android:id="@+id/textView7"
+        android:layout_alignTop="@+id/wichtigkeitText"
+        android:layout_alignStart="@+id/detailAnsichtBeschreibung" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Done"
+        android:id="@+id/done"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

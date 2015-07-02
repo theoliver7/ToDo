@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -118,9 +117,7 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
                 try{
                     newAufgabe.setBild_uri(camera.getUriSavedImage());
 
-                } catch(NullPointerException e) {
-                    Log.d("myTag", "GEEEEECAATCHED");
-                }
+                Log.d("mytag", newAufgabe.getBild_uri().toString());
 
                 ToDoListDAO db = new ToDoListDAO(getActivity().getApplicationContext());
                 try {

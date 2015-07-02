@@ -1,23 +1,23 @@
 package ch.bbcag.todo.Fragments;
 
-import android.media.Image;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import ch.bbcag.todo.R;
 import ch.bbcag.todo.Database.Aufgabe;
 import ch.bbcag.todo.Database.AufgabenDAO;
+import ch.bbcag.todo.Database.ToDoListDAO;
+import ch.bbcag.todo.R;
 
 /**
  * Created by zascho on 24.06.2015.
@@ -55,7 +55,7 @@ public class AufgabeAnsicht_Fragment extends Fragment {
         final ImageView imgview = (ImageView) myView.findViewById(R.id.imageView);
         titel.setText(aufgabe.getAufgabe());
         beschreibung.setText(aufgabe.getBeschreibung());
-     //   wichtigkeit.setText(wichtigkeitErmitteln(aufgabe.getWichtigkeit()));
+        wichtigkeit.setText(wichtigkeitErmitteln(aufgabe.getWichtigkeit()));
 
 
         if(aufgabe.getBild_uri() != null){
@@ -69,13 +69,28 @@ public class AufgabeAnsicht_Fragment extends Fragment {
 
 
 
-        CheckBox checkBox = (CheckBox) myView.findViewById(R.id.taskbeenden);
-        checkBox.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                            titel.setText("OK");
-                                        }
-                                    }
+        Button button = (Button) myView.findViewById(R.id.done);
+        button.setOnClickListener(new View.OnClickListener() {
+                                      @Override
+                                      public void onClick(View view) {
+                                          Fragment myFragment = new Listen_Details_Fragment();
+                                          Bundle bundle = new Bundle();
+                                          ToDoListDAO db = new ToDoListDAO(getActivity());
+                                          AufgabenDAO dao = new AufgabenDAO(getActivity());
+
+                                          dao.aufgabeAlsErledigtMarkieren(getAufgabentitel());
+
+                                          String liste = db.nameAuslesen(dao.foreignKeyAuslesen(getAufgabentitel()));
+                                          bundle.putString("Liste", liste);
+                                          myFragment.setArguments(bundle);
+
+
+                                          FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                          fragmentManager.beginTransaction()
+                                                  .replace(R.id.container, myFragment)
+                                                  .commit();
+                                      }
+                                  }
         );
 
 
