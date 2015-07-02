@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -107,11 +108,17 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
                 liste = (Spinner) myView.findViewById(R.id.ausgewählteliste);
                 wichtigkeit = (RadioGroup) myView.findViewById(R.id.wichtigkeit);
 
+
+
+
                 Aufgabe newAufgabe = new Aufgabe();
                 AufgabenDAO database = new AufgabenDAO(getActivity().getApplicationContext());
                 newAufgabe.setAufgabe(aufgabename.getText().toString());
                 newAufgabe.setBeschreibung(beschreibung.getText().toString());
                 newAufgabe.setBild_uri(camera.getUriSavedImage());
+
+                Log.d("mytag", newAufgabe.getBild_uri().toString());
+
                 ToDoListDAO db = new ToDoListDAO(getActivity().getApplicationContext());
                 try {
                     db.open();
@@ -170,7 +177,6 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
         super.onCreateOptionsMenu(menu, inflater);
-
         inflater.inflate(R.menu.aufgabe_erstellen_bar, menu);
     }
 

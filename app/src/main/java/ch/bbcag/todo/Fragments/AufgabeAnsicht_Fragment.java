@@ -1,14 +1,18 @@
 package ch.bbcag.todo.Fragments;
 
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import ch.bbcag.todo.R;
@@ -46,8 +50,13 @@ public class AufgabeAnsicht_Fragment extends Fragment {
     public void informationenSetzen(Aufgabe aufgabe) {
         final TextView titel = (TextView) myView.findViewById(R.id.aufgabentitel);
         TextView beschreibung = (TextView) myView.findViewById(R.id.detailAnsichtBeschreibung);
+        ImageView imgview = (ImageView) myView.findViewById(R.id.imageView);
         titel.setText(aufgabe.getAufgabe());
         beschreibung.setText(aufgabe.getBeschreibung());
+
+     // imgview.setImageURI(Uri.parse("file:///storage/emulated/0/MyImages/QR_20150702_111202.png"));
+
+        Log.d("myTag", aufgabe.getBild_uri().toString());
 
         CheckBox checkBox = (CheckBox) myView.findViewById(R.id.taskbeenden);
         checkBox.setOnClickListener(new View.OnClickListener() {

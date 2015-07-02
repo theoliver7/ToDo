@@ -1,4 +1,4 @@
-package ch.bbcag.todo.database;
+package ch.bbcag.todo.Database;
 
 /**
  * Created by zascho on 18.06.2015.

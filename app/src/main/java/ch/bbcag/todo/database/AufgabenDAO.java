@@ -1,4 +1,4 @@
-package ch.bbcag.todo.database;
+package ch.bbcag.todo.Database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -30,7 +30,7 @@ public class AufgabenDAO extends DatabaseDAO {
         ContentValues values = new ContentValues();
         values.put(AufgabeSQL.AUFGABE_TITEL, aufgabe.getAufgabe());
         values.put(AufgabeSQL.BESCHREIBUNG, aufgabe.getBeschreibung());
-       //     values.put(AufgabeSQL.BILD_URI, aufgabe.getBild_uri().toString());
+        values.put(AufgabeSQL.BILD_URI, aufgabe.getBild_uri().toString());
         values.put(AufgabeSQL.WICHTIGKEIT, aufgabe.getWichtigkeit());
         values.put(AufgabeSQL.LISTE_ID, aufgabe.getListe());
         long todo_id = db.insert(AufgabeSQL.TABLE_AUFGABEN, null, values);

@@ -1,4 +1,4 @@
-package ch.bbcag.todo.database;
+package ch.bbcag.todo.Database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

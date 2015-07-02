@@ -1,9 +1,8 @@
-package ch.bbcag.todo.database;
+package ch.bbcag.todo.Database;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
