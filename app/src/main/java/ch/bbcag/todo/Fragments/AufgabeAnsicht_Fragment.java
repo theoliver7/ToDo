@@ -49,10 +49,13 @@ public class AufgabeAnsicht_Fragment extends Fragment {
 
     public void informationenSetzen(Aufgabe aufgabe) {
         final TextView titel = (TextView) myView.findViewById(R.id.aufgabentitel);
-        TextView beschreibung = (TextView) myView.findViewById(R.id.detailAnsichtBeschreibung);
-        ImageView imgview = (ImageView) myView.findViewById(R.id.imageView);
+        final TextView beschreibung = (TextView) myView.findViewById(R.id.detailAnsichtBeschreibung);
+        final TextView wichtigkeit = (TextView) myView.findViewById(R.id.wichtigkeitText);
+
+        final ImageView imgview = (ImageView) myView.findViewById(R.id.imageView);
         titel.setText(aufgabe.getAufgabe());
         beschreibung.setText(aufgabe.getBeschreibung());
+     //   wichtigkeit.setText(wichtigkeitErmitteln(aufgabe.getWichtigkeit()));
 
      // imgview.setImageURI(Uri.parse("file:///storage/emulated/0/MyImages/QR_20150702_111202.png"));
 
@@ -73,5 +76,20 @@ public class AufgabeAnsicht_Fragment extends Fragment {
         Bundle bundle = this.getArguments();
         String listenname = bundle.getString("Aufgabe");
         return listenname;
+    }
+
+    private String wichtigkeitErmitteln(long wichtigkeitsID) {
+        if (wichtigkeitsID == -1) {
+            return "Wichtig";
+        }
+        if (wichtigkeitsID == 2131558502) {
+            return "Normal";
+        }
+        if (wichtigkeitsID == 2131558503) {
+            return "Unwichtig";
+        } else {
+            return "Sehr wichtig";
+        }
+
     }
 }

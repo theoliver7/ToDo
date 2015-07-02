@@ -41,4 +41,15 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="wichtigkeit"
+        android:id="@+id/wichtigkeitText"
+        android:layout_below="@+id/detailAnsichtBeschreibung"
+        android:layout_alignStart="@+id/detailAnsichtBeschreibung"
+        android:layout_marginTop="46dp" />
+
 </RelativeLayout>
