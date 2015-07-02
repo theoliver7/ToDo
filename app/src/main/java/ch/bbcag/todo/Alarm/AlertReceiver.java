@@ -1,13 +1,11 @@
 package ch.bbcag.todo.Alarm;
 
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
-import android.widget.Toast;
 
 import ch.bbcag.todo.Database.Aufgabe;
 import ch.bbcag.todo.MainActivity;
