@@ -45,9 +45,13 @@ public class AufgabeAnsicht_Fragment extends Fragment {
 
     public void informationenSetzen(Aufgabe aufgabe) {
         final TextView titel = (TextView) myView.findViewById(R.id.aufgabentitel);
-        TextView beschreibung = (TextView) myView.findViewById(R.id.detailAnsichtBeschreibung);
+        final TextView beschreibung = (TextView) myView.findViewById(R.id.detailAnsichtBeschreibung);
+        final TextView wichtigkeit = (TextView) myView.findViewById(R.id.wichtigkeitText);
+
+
         titel.setText(aufgabe.getAufgabe());
         beschreibung.setText(aufgabe.getBeschreibung());
+        wichtigkeit.setText(wichtigkeitErmitteln(aufgabe.getWichtigkeit()));
 
         CheckBox checkBox = (CheckBox) myView.findViewById(R.id.taskbeenden);
         checkBox.setOnClickListener(new View.OnClickListener() {
@@ -60,9 +64,25 @@ public class AufgabeAnsicht_Fragment extends Fragment {
 
 
     }
+
     private String getAufgabentitel() {
         Bundle bundle = this.getArguments();
         String listenname = bundle.getString("Aufgabe");
         return listenname;
+    }
+
+    private String wichtigkeitErmitteln(long wichtigkeitsID) {
+        if (wichtigkeitsID == -1) {
+            return "Wichtig";
+        }
+        if (wichtigkeitsID == 2131558502) {
+            return "Normal";
+        }
+        if (wichtigkeitsID == 2131558503) {
+            return "Unwichtig";
+        } else {
+            return "Sehr wichtig";
+        }
+
     }
 }
