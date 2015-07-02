@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.util.Log;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -59,7 +58,7 @@ public class AufgabenDAO extends DatabaseDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        Cursor cursor = db.rawQuery(AufgabeSQL.getSqlQuerySelectAllInformationForAufgabe() + aufgabenTitel, null);
+        Cursor cursor = db.rawQuery(AufgabeSQL.getSqlQuerySelectAllInformationForAufgabe() +"'"+ aufgabenTitel+"'", null);
         Aufgabe aufgabe = new Aufgabe();
         while (cursor.moveToNext()) {
             aufgabe.setAufgabe(cursor.getString(1));
