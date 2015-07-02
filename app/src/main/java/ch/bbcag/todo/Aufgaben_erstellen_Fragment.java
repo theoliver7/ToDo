@@ -13,6 +13,7 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -44,12 +45,10 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
     private EditText beschreibung;
     private Spinner liste;
     private RadioGroup wichtigkeit;
-    private String[] arraySpinner;
+    private Camera camera = new Camera();
     int i = 5;
     int minute, hour, day, month, year;
     final Calendar calendar = Calendar.getInstance();
-
-    final static int RQS_1 = 1;
 
     @Nullable
     @Override
@@ -113,6 +112,7 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
                 AufgabenDAO database = new AufgabenDAO(getActivity().getApplicationContext());
                 newAufgabe.setAufgabe(aufgabename.getText().toString());
                 newAufgabe.setBeschreibung(beschreibung.getText().toString());
+                newAufgabe.setBild_uri(camera.getUriSavedImage());
                 ToDoListDAO db = new ToDoListDAO(getActivity().getApplicationContext());
                 try {
                     db.open();
@@ -146,6 +146,14 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
         });
 
         return myView;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        camera.createCamera(this.getActivity());
+
+        return super.onOptionsItemSelected(item);
     }
 
     public long getTime(int year, int month, int day, int hour, int minute) {
