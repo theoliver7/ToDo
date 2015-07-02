@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import ch.bbcag.todo.Alarm.AlarmSetter;
 import ch.bbcag.todo.Alarm.AlertReceiver;
 import ch.bbcag.todo.database.Aufgabe;
 import ch.bbcag.todo.database.AufgabenDAO;
@@ -102,7 +103,8 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                setAlert();
+                AlarmSetter alarm = new AlarmSetter( getActivity());
+                alarm.setAlert(getTime(year, month, day, hour, minute));
                 aufgabename = (EditText) myView.findViewById(R.id.aufgabename);
                 beschreibung = (EditText) myView.findViewById(R.id.aufgabebeschreibung);
                 liste = (Spinner) myView.findViewById(R.id.ausgewählteliste);
@@ -167,18 +169,6 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
         long difference = cal.getTimeInMillis() - Calendar.getInstance().getTimeInMillis();
         return difference;
     }
-
-    public void setAlert() {
-        long test = getTime(this.year, this.month, this.day, this.hour, this.minute);
-        Intent intent = new Intent(getActivity(), AlertReceiver.class);
-        int id_ = (int) System.currentTimeMillis();
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                getActivity().getApplicationContext(), id_, intent, 0);
-        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()
-                + test, pendingIntent);
-    }
-
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
