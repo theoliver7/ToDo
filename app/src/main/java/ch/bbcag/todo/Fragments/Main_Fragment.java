@@ -1,4 +1,4 @@
-package ch.bbcag.todo;
+package ch.bbcag.todo.Fragments;
 
 
 import android.os.Bundle;
@@ -17,8 +17,9 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-import ch.bbcag.todo.database.ToDoList;
-import ch.bbcag.todo.database.ToDoListDAO;
+import ch.bbcag.todo.R;
+import ch.bbcag.todo.Database.ToDoList;
+import ch.bbcag.todo.Database.ToDoListDAO;
 
 /**
  * Created by zascho on 17.06.2015.

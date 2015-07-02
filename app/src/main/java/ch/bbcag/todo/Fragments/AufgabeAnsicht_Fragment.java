@@ -1,4 +1,4 @@
-package ch.bbcag.todo;
+package ch.bbcag.todo.Fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,8 +11,9 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import ch.bbcag.todo.database.Aufgabe;
-import ch.bbcag.todo.database.AufgabenDAO;
+import ch.bbcag.todo.R;
+import ch.bbcag.todo.Database.Aufgabe;
+import ch.bbcag.todo.Database.AufgabenDAO;
 
 /**
  * Created by zascho on 24.06.2015.

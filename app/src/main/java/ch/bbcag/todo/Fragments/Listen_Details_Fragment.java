@@ -1,4 +1,4 @@
-package ch.bbcag.todo;
+package ch.bbcag.todo.Fragments;
 
 
 import android.os.Bundle;
@@ -15,8 +15,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import ch.bbcag.todo.database.AufgabenDAO;
-import ch.bbcag.todo.database.ToDoListDAO;
+import ch.bbcag.todo.Ownarrayadapter;
+import ch.bbcag.todo.R;
+import ch.bbcag.todo.Database.AufgabenDAO;
+import ch.bbcag.todo.Database.ToDoListDAO;
 
 /**
  * Created by zascho on 17.06.2015.

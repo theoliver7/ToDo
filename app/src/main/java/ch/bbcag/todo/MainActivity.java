@@ -22,8 +22,11 @@ import android.widget.Toast;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import ch.bbcag.todo.database.ToDoList;
-import ch.bbcag.todo.database.ToDoListDAO;
+import ch.bbcag.todo.Fragments.AufgabeAnsicht_Fragment;
+import ch.bbcag.todo.Fragments.Aufgaben_erstellen_Fragment;
+import ch.bbcag.todo.Fragments.Main_Fragment;
+import ch.bbcag.todo.Database.ToDoList;
+import ch.bbcag.todo.Database.ToDoListDAO;
 
 
 public class MainActivity extends ActionBarActivity

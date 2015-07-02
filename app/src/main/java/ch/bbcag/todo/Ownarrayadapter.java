@@ -15,9 +15,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
-/**
- * Created by zfehrn on 17.06.2015.
- */
+import ch.bbcag.todo.Fragments.AufgabeAnsicht_Fragment;
+
 public class Ownarrayadapter extends ArrayAdapter<String> {
     LayoutInflater mInflater;
     FragmentManager fragmentManager;
