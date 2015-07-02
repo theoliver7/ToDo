@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -120,8 +119,6 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
                 newAufgabe.setBeschreibung(beschreibung.getText().toString());
                 newAufgabe.setBild_uri(camera.getUriSavedImage());
 
-                Log.d("mytag", newAufgabe.getBild_uri().toString());
-
                 ToDoListDAO db = new ToDoListDAO(getActivity().getApplicationContext());
                 try {
                     db.open();
@@ -137,8 +134,6 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
                 db.close();
                 Toast toast = Toast.makeText(getActivity().getApplicationContext(), "Aufgabe wurde erstellt", Toast.LENGTH_SHORT);
                 toast.show();
-
-
                 Bundle bundle = new Bundle();
                 bundle.putString("Liste", liste.getSelectedItem().toString());
                 Fragment myFragment = new Listen_Details_Fragment();

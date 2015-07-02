@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import ch.bbcag.todo.Database.AufgabenDAO;
 import ch.bbcag.todo.Fragments.AufgabeAnsicht_Fragment;
 
 public class Ownarrayadapter extends ArrayAdapter<String> {
@@ -53,11 +54,14 @@ public class Ownarrayadapter extends ArrayAdapter<String> {
         checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
+                AufgabenDAO db = new AufgabenDAO(getContext());
+                String selectedFromList = (String) (aufgabeTextView.getText());
+                if (isChecked) {
                     aufgabeTextView.setTextColor(Color.rgb(163, 163, 163));
-                }
-                else {
+                    db.aufgabeAlsErledigtMarkieren(selectedFromList);
+                } else {
                     aufgabeTextView.setTextColor(Color.rgb(0, 0, 0));
+                    db.aufgabeAlsNichtErledigtMarkieren(selectedFromList);
                 }
             }
         });
