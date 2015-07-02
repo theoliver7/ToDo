@@ -22,11 +22,10 @@ public class Camera {
 
     public void createCamera(Activity activity){
         Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        activity.startActivityForResult(cameraIntent, TAKE_PICTURE);
 
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 
         //folder stuff
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         File imagesFolder = new File(Environment.getExternalStorageDirectory(), "MyImages");
         imagesFolder.mkdirs();
 
@@ -34,6 +33,8 @@ public class Camera {
         uriSavedImage = Uri.fromFile(image);
 
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
+        activity.startActivityForResult(cameraIntent, TAKE_PICTURE);
+
     }
     public Uri getUriSavedImage() {
         return uriSavedImage;

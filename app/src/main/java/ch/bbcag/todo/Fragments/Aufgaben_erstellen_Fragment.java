@@ -117,7 +117,10 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
                 AufgabenDAO database = new AufgabenDAO(getActivity().getApplicationContext());
                 newAufgabe.setAufgabe(aufgabename.getText().toString());
                 newAufgabe.setBeschreibung(beschreibung.getText().toString());
-                newAufgabe.setBild_uri(camera.getUriSavedImage());
+                try{
+                    newAufgabe.setBild_uri(camera.getUriSavedImage());
+
+                Log.d("mytag", newAufgabe.getBild_uri().toString());
 
                 ToDoListDAO db = new ToDoListDAO(getActivity().getApplicationContext());
                 try {
@@ -134,6 +137,8 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
                 db.close();
                 Toast toast = Toast.makeText(getActivity().getApplicationContext(), "Aufgabe wurde erstellt", Toast.LENGTH_SHORT);
                 toast.show();
+
+
                 Bundle bundle = new Bundle();
                 bundle.putString("Liste", liste.getSelectedItem().toString());
                 Fragment myFragment = new Listen_Details_Fragment();
