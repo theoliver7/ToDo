@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
+import ch.bbcag.todo.Database.Aufgabe;
 import ch.bbcag.todo.MainActivity;
 import ch.bbcag.todo.R;
 
@@ -16,14 +17,14 @@ import ch.bbcag.todo.R;
  * Created by zjorgm on 19.06.2015.
  */
 public class AlertReceiver extends BroadcastReceiver {
-
     @Override
     public void onReceive(Context k1, Intent k2) {
         // TODO Auto-generated method stub
-        createNotification(k1, "Times Up", "5 seconds has passed", "Alert");
+
+        createNotification(k1, k2.getStringExtra("aufgabenname"),k2.getStringExtra("aufgabenname"), k2.getStringExtra("beschreibung"));
     }
 
-    public void createNotification(Context context, String msg, String msgtext, String msgalert){
+    public void createNotification(Context context, String msg, String msgalert, String msgtext){
         PendingIntent notificIntent = PendingIntent.getActivity(context, 0, new Intent(context, MainActivity.class), 0);
 
         NotificationCompat.Builder mbuilder = new NotificationCompat.Builder(context)

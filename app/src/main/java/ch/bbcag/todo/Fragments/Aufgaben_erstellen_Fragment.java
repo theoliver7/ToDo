@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import ch.bbcag.todo.Alarm.AlarmSetter;
 import ch.bbcag.todo.Alarm.AlertReceiver;
 import ch.bbcag.todo.Camera;
 import ch.bbcag.todo.Database.Aufgabe;
@@ -49,9 +50,8 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
     private Spinner liste;
     private RadioGroup wichtigkeit;
     private Camera camera = new Camera();
-    int i = 5;
-    int minute, hour, day, month, year;
-    final Calendar calendar = Calendar.getInstance();
+    private int minute, hour, day, month, year;
+    private final Calendar calendar = Calendar.getInstance();
 
     @Nullable
     @Override
@@ -105,14 +105,11 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                setAlert();
+
                 aufgabename = (EditText) myView.findViewById(R.id.aufgabename);
                 beschreibung = (EditText) myView.findViewById(R.id.aufgabebeschreibung);
                 liste = (Spinner) myView.findViewById(R.id.ausgewählteliste);
                 wichtigkeit = (RadioGroup) myView.findViewById(R.id.wichtigkeit);
-
-
-
 
                 Aufgabe newAufgabe = new Aufgabe();
                 AufgabenDAO database = new AufgabenDAO(getActivity().getApplicationContext());
@@ -141,6 +138,8 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
                 Toast toast = Toast.makeText(getActivity().getApplicationContext(), "Aufgabe wurde erstellt", Toast.LENGTH_SHORT);
                 toast.show();
 
+                AlarmSetter alarm = new AlarmSetter( getActivity());
+                alarm.setAlert(getTime(year, month, day, hour, minute), newAufgabe.getAufgabe() );
 
                 Bundle bundle = new Bundle();
                 bundle.putString("Liste", liste.getSelectedItem().toString());

@@ -61,6 +61,7 @@ public class AufgabeAnsicht_Fragment extends Fragment {
         if(aufgabe.getBild_uri() != null){
             imgview.setImageURI(aufgabe.getBild_uri());
 
+
         } else {
             imgview.setImageResource(R.mipmap.todo);
         }
