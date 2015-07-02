@@ -57,9 +57,16 @@ public class AufgabeAnsicht_Fragment extends Fragment {
         beschreibung.setText(aufgabe.getBeschreibung());
      //   wichtigkeit.setText(wichtigkeitErmitteln(aufgabe.getWichtigkeit()));
 
-     // imgview.setImageURI(Uri.parse("file:///storage/emulated/0/MyImages/QR_20150702_111202.png"));
 
-        Log.d("myTag", aufgabe.getBild_uri().toString());
+        if(aufgabe.getBild_uri() != null){
+            imgview.setImageURI(aufgabe.getBild_uri());
+
+        } else {
+            imgview.setImageResource(R.mipmap.todo);
+        }
+
+
+
 
         CheckBox checkBox = (CheckBox) myView.findViewById(R.id.taskbeenden);
         checkBox.setOnClickListener(new View.OnClickListener() {

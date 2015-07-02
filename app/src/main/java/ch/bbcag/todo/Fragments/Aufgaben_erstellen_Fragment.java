@@ -118,9 +118,12 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
                 AufgabenDAO database = new AufgabenDAO(getActivity().getApplicationContext());
                 newAufgabe.setAufgabe(aufgabename.getText().toString());
                 newAufgabe.setBeschreibung(beschreibung.getText().toString());
-                newAufgabe.setBild_uri(camera.getUriSavedImage());
+                try{
+                    newAufgabe.setBild_uri(camera.getUriSavedImage());
 
-                Log.d("mytag", newAufgabe.getBild_uri().toString());
+                } catch(NullPointerException e) {
+                    Log.d("myTag", "GEEEEECAATCHED");
+                }
 
                 ToDoListDAO db = new ToDoListDAO(getActivity().getApplicationContext());
                 try {
