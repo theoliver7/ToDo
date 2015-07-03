@@ -30,7 +30,11 @@ public class AufgabenDAO extends DatabaseDAO {
         ContentValues values = new ContentValues();
         values.put(AufgabeSQL.AUFGABE_TITEL, aufgabe.getAufgabe());
         values.put(AufgabeSQL.BESCHREIBUNG, aufgabe.getBeschreibung());
-        values.put(AufgabeSQL.BILD_URI, aufgabe.getBild_uri().toString());
+        try{
+            values.put(AufgabeSQL.BILD_URI, aufgabe.getBild_uri().toString());
+        } catch (Exception e){
+
+        }
         values.put(AufgabeSQL.WICHTIGKEIT, aufgabe.getWichtigkeit());
         values.put(AufgabeSQL.LISTE_ID, aufgabe.getListe());
         long todo_id = db.insert(AufgabeSQL.TABLE_AUFGABEN, null, values);
@@ -66,7 +70,11 @@ public class AufgabenDAO extends DatabaseDAO {
         while (cursor.moveToNext()) {
             aufgabe.setAufgabe(cursor.getString(1));
             aufgabe.setBeschreibung(cursor.getString(2));
-            aufgabe.setBild_uri(Uri.parse(cursor.getString(3)));
+            try {
+                aufgabe.setBild_uri(Uri.parse(cursor.getString(3)));
+            } catch (Exception e){
+
+            }
             aufgabe.setWichtigkeit(cursor.getInt(4));
         }
 

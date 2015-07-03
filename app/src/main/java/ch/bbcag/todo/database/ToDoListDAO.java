@@ -74,4 +74,14 @@ public class ToDoListDAO extends DatabaseDAO {
         close();
         return listenname;
     }
+
+    public void addListToFavorites(String liste) {
+        try {
+            open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        db.rawQuery(ToDoListSQL.getSqlQueryAddListToFavorites(liste)+ "'"+ liste+ "' ;",null);
+        close();
+    }
 }
