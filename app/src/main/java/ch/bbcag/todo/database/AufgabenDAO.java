@@ -30,11 +30,12 @@ public class AufgabenDAO extends DatabaseDAO {
         ContentValues values = new ContentValues();
         values.put(AufgabeSQL.AUFGABE_TITEL, aufgabe.getAufgabe());
         values.put(AufgabeSQL.BESCHREIBUNG, aufgabe.getBeschreibung());
-        try{
+        try {
             values.put(AufgabeSQL.BILD_URI, aufgabe.getBild_uri().toString());
-        } catch (Exception e){
+        } catch (Exception e) {
 
         }
+
         values.put(AufgabeSQL.WICHTIGKEIT, aufgabe.getWichtigkeit());
         values.put(AufgabeSQL.LISTE_ID, aufgabe.getListe());
         long todo_id = db.insert(AufgabeSQL.TABLE_AUFGABEN, null, values);
@@ -50,7 +51,7 @@ public class AufgabenDAO extends DatabaseDAO {
         ArrayList aufgabenvonListe = new ArrayList<Aufgabe>();
         Cursor cursor = db.rawQuery(AufgabeSQL.getSqlQuerySelectAlleAufgabenFromListe() + foreignkey, null);
         while (cursor.moveToNext()) {
-            Aufgabe aufgabe= new Aufgabe();
+            Aufgabe aufgabe = new Aufgabe();
             aufgabe.setAufgabe(cursor.getString(0));
             aufgabe.setErledigt(cursor.getInt(1));
             aufgabenvonListe.add(aufgabe);
@@ -82,13 +83,13 @@ public class AufgabenDAO extends DatabaseDAO {
         return aufgabe;
     }
 
-    public void deleteAufgabe(String aufgabenTitel) {
+    public void deleteAufgabe() {
         try {
             open();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        db.rawQuery(AufgabeSQL.getSqlQueryDeleteAufgabe() + aufgabenTitel, null);
+        db.delete(AufgabeSQL.TABLE_AUFGABEN,AufgabeSQL.ERLEDIGT+"=?",new String[]{"1"});
         close();
 
     }
@@ -112,8 +113,8 @@ public class AufgabenDAO extends DatabaseDAO {
             e.printStackTrace();
         }
         ContentValues werte = new ContentValues();
-        werte.put("Erledigt",1);
-        db.update(AufgabeSQL.TABLE_AUFGABEN,werte,"Titel=?",new String[]{aufgabenTitel});
+        werte.put("Erledigt", 1);
+        db.update(AufgabeSQL.TABLE_AUFGABEN, werte, "Titel=?", new String[]{aufgabenTitel});
         close();
 
     }
@@ -125,7 +126,7 @@ public class AufgabenDAO extends DatabaseDAO {
             e.printStackTrace();
         }
         ContentValues werte = new ContentValues();
-        werte.put("Erledigt",0);
+        werte.put("Erledigt", 0);
         db.update(AufgabeSQL.TABLE_AUFGABEN, werte, "Titel=?", new String[]{aufgabenTitel});
         close();
 
