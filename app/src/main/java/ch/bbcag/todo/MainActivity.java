@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.sql.SQLException;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 
 import ch.bbcag.todo.Fragments.AufgabeAnsicht_Fragment;
 import ch.bbcag.todo.Fragments.Aufgaben_erstellen_Fragment;
+import ch.bbcag.todo.Fragments.Listen_Details_Fragment;
 import ch.bbcag.todo.Fragments.Main_Fragment;
 import ch.bbcag.todo.Database.ToDoList;
 import ch.bbcag.todo.Database.ToDoListDAO;
@@ -52,13 +54,11 @@ public class MainActivity extends ActionBarActivity
     private CharSequence mTitle;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-//        addListenToList();
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -78,13 +78,6 @@ public class MainActivity extends ActionBarActivity
         listItems.add("Clicked : " + clickCounter++);
         adapter.notifyDataSetChanged();
     }
-//    private void addListenToList() {
-//        ListView todoListen = (ListView) findViewById((R.id.toDoListenList));
-//        toDoListen = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
-//        toDoListen.add(getString(R.string.verwalten));
-//        todoListen.setAdapter(toDoListen);
-//
-//    }
 
 
     @Override
@@ -174,7 +167,6 @@ public class MainActivity extends ActionBarActivity
                     toast.show();
 
 
-
                 }
             });
             alert.setNeutralButton("Favoriten", new DialogInterface.OnClickListener() {
@@ -202,8 +194,14 @@ public class MainActivity extends ActionBarActivity
                     .replace(R.id.container, myFragment)
                     .commit();
             return true;
-        } else if(id == R.id.favoriten){
+        } else if (id == R.id.favoriten) {
+            ToDoListDAO test = new ToDoListDAO(this);
 
+            TextView hi = (TextView) this.findViewById(R.id.Listenname);
+
+            String teste = hi.getText().toString();
+
+            test.addListToFavorites(hi.getText().toString());
         }
 
         return super.onOptionsItemSelected(item);

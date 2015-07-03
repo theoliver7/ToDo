@@ -28,6 +28,7 @@ public class Main_Fragment extends Fragment {
     private View myView;
     private ArrayAdapter todolisteadapter;
     private ListView todoliste;
+    private ToDoList liste;
 
     @Nullable
     @Override

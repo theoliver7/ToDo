@@ -81,7 +81,7 @@ public class Listen_Details_Fragment extends Fragment {
 
     }
 
-    private String getListentitel() {
+    public String getListentitel() {
         Bundle bundle = this.getArguments();
         String listenname = bundle.getString("Liste");
         return listenname;
