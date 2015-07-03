@@ -3,6 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
     <item
+        android:id="@+id/favoriten"
+        android:title="@string/plus_aufgabe"
+        android:orderInCategory="100"
+        android:icon="@mipmap/stern"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/plus_aufgabe"
         android:title="@string/plus_aufgabe"
         android:orderInCategory="100"

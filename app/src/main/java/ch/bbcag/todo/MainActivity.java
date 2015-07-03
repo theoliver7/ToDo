@@ -202,7 +202,10 @@ public class MainActivity extends ActionBarActivity
                     .replace(R.id.container, myFragment)
                     .commit();
             return true;
+        } else if(id == R.id.favoriten){
+
         }
+
         return super.onOptionsItemSelected(item);
     }
 

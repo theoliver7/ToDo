@@ -66,10 +66,6 @@ public class Main_Fragment extends Fragment {
             }
         });
 
-
-
-        
-
     }
 
 
