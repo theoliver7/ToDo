@@ -16,15 +16,18 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import ch.bbcag.todo.Database.Aufgabe;
 import ch.bbcag.todo.Database.AufgabenDAO;
 import ch.bbcag.todo.Fragments.AufgabeAnsicht_Fragment;
 
-public class Ownarrayadapter extends ArrayAdapter<String> {
+public class Ownarrayadapter extends ArrayAdapter<Aufgabe> {
     LayoutInflater mInflater;
     FragmentManager fragmentManager;
+    List<Aufgabe> aufgaben;
 
-    public Ownarrayadapter(Context context, List<String> items, LayoutInflater inflater, FragmentManager fragmentManager) {
-        super(context, -1, items);
+    public Ownarrayadapter(Context context, List<Aufgabe> aufgaben, LayoutInflater inflater, FragmentManager fragmentManager) {
+        super(context, -1, aufgaben);
+
         this.mInflater = inflater;
         this.fragmentManager = fragmentManager;
     }
@@ -61,7 +64,7 @@ public class Ownarrayadapter extends ArrayAdapter<String> {
                     AufgabenDAO db = new AufgabenDAO(getContext());
                     aufgabeTextView.setTextColor(Color.rgb(163, 163, 163));
                     db.aufgabeAlsErledigtMarkieren(selectedFromList);
-                    Log.e("Test","Checked");
+                    Log.e("Test", "Checked");
 
                 } else {
                     AufgabenDAO db = new AufgabenDAO(getContext());
@@ -73,9 +76,18 @@ public class Ownarrayadapter extends ArrayAdapter<String> {
             }
         });
 
-        final String aufgabe = this.getItem(pos);
+        String aufgabe = this.getItem(pos).getAufgabe();
+        int erledigt= this.getItem(pos).getErledigt();
+
+        if (erledigt==1){
+            checkbox.setChecked(true);
+        }
+        else {
+            checkbox.setChecked(false);
+        }
 
         ((TextView) convertView.findViewById(R.id.aufgabe)).setText(aufgabe);
+
 
         return convertView;
     }

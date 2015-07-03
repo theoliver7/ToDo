@@ -17,9 +17,9 @@
         android:text="Titel"
         android:id="@+id/aufgabentitel"
         android:layout_marginStart="26dp"
-        android:layout_below="@id/imageView"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="35dp"
+        android:layout_below="@+id/imageView"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -37,10 +37,9 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="wichtigkeit"
         android:id="@+id/wichtigkeitText"
-        android:layout_marginTop="53dp"
+        android:layout_marginTop="54dp"
         android:layout_below="@+id/detailAnsichtBeschreibung"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="71dp" />
+        android:layout_alignStart="@+id/done" />
 
     <TextView
         android:layout_width="wrap_content"
