@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import ch.bbcag.todo.Database.Aufgabe;
 import ch.bbcag.todo.Database.AufgabenDAO;
@@ -28,7 +27,7 @@ public class AufgabeAnsicht_Fragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        myView = inflater.inflate(R.layout.aufgabe_layout, container, false);
+        myView = inflater.inflate(R.layout.aufgabe_ansicht_layout, container, false);
         AufgabenDAO aufgabenDAO = new AufgabenDAO(getActivity());
         informationenSetzen(aufgabenDAO.getAllInformationForTask(getAufgabentitel()));
         return myView;
@@ -79,15 +78,10 @@ public class AufgabeAnsicht_Fragment extends Fragment {
                                           AufgabenDAO dao = new AufgabenDAO(getActivity());
 
                                           dao.aufgabeAlsErledigtMarkieren(getAufgabentitel());
-                                          Toast toast=new Toast(getActivity().getApplicationContext());
-                                          toast.setText("HEllo");
-                                          toast.show();
-
 
                                           String liste = db.nameAuslesen(dao.foreignKeyAuslesen(getAufgabentitel()));
                                           bundle.putString("Liste", liste);
                                           myFragment.setArguments(bundle);
-
 
                                           FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                                           fragmentManager.beginTransaction()
