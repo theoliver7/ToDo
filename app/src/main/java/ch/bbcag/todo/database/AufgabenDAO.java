@@ -58,7 +58,7 @@ public class AufgabenDAO extends DatabaseDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        Cursor cursor = db.rawQuery(AufgabeSQL.getSqlQuerySelectAllInformationForAufgabe() +"'"+ aufgabenTitel+"'", null);
+        Cursor cursor = db.rawQuery(AufgabeSQL.getSqlQuerySelectAllInformationForAufgabe() + "'" + aufgabenTitel + "'", null);
         Aufgabe aufgabe = new Aufgabe();
         while (cursor.moveToNext()) {
             aufgabe.setAufgabe(cursor.getString(1));
@@ -82,4 +82,39 @@ public class AufgabenDAO extends DatabaseDAO {
 
     }
 
+    public int foreignKeyAuslesen(String aufgabenTitel) {
+        try {
+            open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Cursor cursor = db.rawQuery(AufgabeSQL.getSqlQuerySelectForeignKey() + "'" + aufgabenTitel + "'", null);
+        cursor.moveToFirst();
+        close();
+        return cursor.getInt(0);
+    }
+
+    public void aufgabeAlsErledigtMarkieren(String aufgabenTitel) {
+        try {
+            open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ContentValues werte = new ContentValues();
+        werte.put("Erledigt",1);
+        db.update(AufgabeSQL.TABLE_AUFGABEN,werte,"Titel=?",new String[]{aufgabenTitel});
+        close();
+
+    }
+
+    public void aufgabeAlsNichtErledigtMarkieren(String aufgabenTitel) {
+        try {
+            open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        db.rawQuery(AufgabeSQL.getSqlQueryAufgabeNichtErledigt() + "'" + aufgabenTitel + "'", null);
+        close();
+
+    }
 }
