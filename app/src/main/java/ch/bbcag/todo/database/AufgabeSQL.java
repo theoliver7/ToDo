@@ -32,7 +32,7 @@ public class AufgabeSQL {
     }
 
     public static String getSqlQueryDeleteAufgabe() {
-        return "DELETE FROM " + TABLE_AUFGABEN + " WHERE " + AUFGABE_TITEL + " =";
+        return "DELETE FROM " + TABLE_AUFGABEN + " WHERE " + ERLEDIGT + " = 1";
     }
 
     public static String getSqlQuerySelectForeignKey() {
