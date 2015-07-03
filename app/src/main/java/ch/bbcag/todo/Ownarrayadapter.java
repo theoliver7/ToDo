@@ -68,7 +68,7 @@ public class Ownarrayadapter extends ArrayAdapter<Aufgabe> {
 
                 } else {
                     AufgabenDAO db = new AufgabenDAO(getContext());
-                    aufgabeTextView.setTextColor(Color.rgb(0, 0, 0));
+                    aufgabeTextView.setTextColor(getContext().getResources().getColor(R.color.textfarbe));
                     db.aufgabeAlsNichtErledigtMarkieren(selectedFromList);
                     Log.e("Test", "Unchecked");
 

@@ -4,21 +4,21 @@ package ch.bbcag.todo.Fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import ch.bbcag.todo.Ownarrayadapter;
-import ch.bbcag.todo.R;
 import ch.bbcag.todo.Database.AufgabenDAO;
 import ch.bbcag.todo.Database.ToDoListDAO;
+import ch.bbcag.todo.Ownarrayadapter;
+import ch.bbcag.todo.R;
 
 /**
  * Created by zascho on 17.06.2015.
@@ -52,16 +52,30 @@ public class Listen_Details_Fragment extends Fragment {
         inflater.inflate(R.menu.plus_aufgabe, menu);
     }
 
-    private void addAufgabetolist(ArrayList aufgabenTitel) {
+    private void addAufgabetolist(ArrayList aufgabe) {
         ListView list = (ListView) myView.findViewById(R.id.listView);
-        Ownarrayadapter ownarrayadapter = new Ownarrayadapter(this.getActivity().getApplicationContext(), aufgabenTitel, this.getActivity().getLayoutInflater(), this.getActivity().getSupportFragmentManager());
+        Ownarrayadapter ownarrayadapter = new Ownarrayadapter(this.getActivity().getApplicationContext(), aufgabe, this.getActivity().getLayoutInflater(), this.getActivity().getSupportFragmentManager());
         list.setAdapter(ownarrayadapter);
 
 
-        final ListView aufgabenListe = (ListView) myView.findViewById(R.id.listView);
-        aufgabenListe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        final TextView aufgabeloeschen = (TextView) myView.findViewById(R.id.aufgabenloeschen);
+        aufgabeloeschen.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onClick(View v) {
+            AufgabenDAO db = new AufgabenDAO(getActivity().getApplicationContext());
+                db.deleteAufgabe();
+                Bundle bundle = new Bundle();
+                TextView listenname= (TextView)myView.findViewById(R.id.Listenname);
+                bundle.putString("Liste",listenname.getText().toString() );
+                Fragment myFragment = new Main_Fragment();
+                myFragment.setArguments(bundle);
+                // update the main content by replacing fragments
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, myFragment)
+                        .commit();
+
             }
         });
 

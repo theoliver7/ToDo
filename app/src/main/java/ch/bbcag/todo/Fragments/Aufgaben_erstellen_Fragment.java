@@ -115,10 +115,10 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
                 AufgabenDAO database = new AufgabenDAO(getActivity().getApplicationContext());
                 newAufgabe.setAufgabe(aufgabename.getText().toString());
                 newAufgabe.setBeschreibung(beschreibung.getText().toString());
-                try{
+                try {
                     newAufgabe.setBild_uri(camera.getUriSavedImage());
 
-                } catch(NullPointerException e) {
+                } catch (NullPointerException e) {
                     Log.d("myTag", "GEEEEECAATCHED");
                 }
 
@@ -138,7 +138,7 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
                 Toast toast = Toast.makeText(getActivity().getApplicationContext(), "Aufgabe wurde erstellt", Toast.LENGTH_SHORT);
                 toast.show();
 
-                AlarmSetter alarm = new AlarmSetter( getActivity());
+                AlarmSetter alarm = new AlarmSetter(getActivity());
                 alarm.setAlert(getTime(year, month, day, hour, minute), newAufgabe.getAufgabe());
 
                 Bundle bundle = new Bundle();
@@ -221,6 +221,4 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
 
         s.setAdapter(adapter);
     }
-
-
 }

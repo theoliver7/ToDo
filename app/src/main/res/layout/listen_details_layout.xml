@@ -9,7 +9,8 @@
         android:text="Liste"
         android:id="@+id/Listenname"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="#ff6e6e6e" />
 
     <ListView
         android:layout_width="match_parent"
@@ -17,5 +18,13 @@
         android:id="@+id/listView"
         android:layout_alignParentStart="true"
         android:layout_below="@id/Listenname" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aufgaben löschen"
+        android:id="@+id/aufgabenloeschen"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
