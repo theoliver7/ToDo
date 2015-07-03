@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import ch.bbcag.todo.Database.Aufgabe;
 import ch.bbcag.todo.Database.AufgabenDAO;
@@ -79,6 +79,10 @@ public class AufgabeAnsicht_Fragment extends Fragment {
                                           AufgabenDAO dao = new AufgabenDAO(getActivity());
 
                                           dao.aufgabeAlsErledigtMarkieren(getAufgabentitel());
+                                          Toast toast=new Toast(getActivity().getApplicationContext());
+                                          toast.setText("HEllo");
+                                          toast.show();
+
 
                                           String liste = db.nameAuslesen(dao.foreignKeyAuslesen(getAufgabentitel()));
                                           bundle.putString("Liste", liste);

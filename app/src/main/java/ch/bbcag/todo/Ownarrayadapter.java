@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,14 +55,20 @@ public class Ownarrayadapter extends ArrayAdapter<String> {
         checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                AufgabenDAO db = new AufgabenDAO(getContext());
+
                 String selectedFromList = (String) (aufgabeTextView.getText());
                 if (isChecked) {
+                    AufgabenDAO db = new AufgabenDAO(getContext());
                     aufgabeTextView.setTextColor(Color.rgb(163, 163, 163));
                     db.aufgabeAlsErledigtMarkieren(selectedFromList);
+                    Log.e("Test","Checked");
+
                 } else {
+                    AufgabenDAO db = new AufgabenDAO(getContext());
                     aufgabeTextView.setTextColor(Color.rgb(0, 0, 0));
                     db.aufgabeAlsNichtErledigtMarkieren(selectedFromList);
+                    Log.e("Test", "Unchecked");
+
                 }
             }
         });
