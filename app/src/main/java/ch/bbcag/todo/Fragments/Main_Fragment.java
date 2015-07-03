@@ -49,8 +49,6 @@ public class Main_Fragment extends Fragment {
         }
         todoliste.setAdapter(todolisteadapter);
 
-
-
         todoliste.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long l) {
