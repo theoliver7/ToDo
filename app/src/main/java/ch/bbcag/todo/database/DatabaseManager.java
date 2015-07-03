@@ -30,7 +30,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
         // on upgrade drop older tables
         db.execSQL("DROP TABLE IF EXISTS " + AufgabeSQL.TABLE_AUFGABEN);
         db.execSQL("DROP TABLE IF EXISTS " + ToDoListSQL.TABLE_LISTEN);
-        db.execSQL("DROP TABLE IF EXISTS " + StandortSQL.TABLE_STANDORT);
         // create new tables
         onCreate(db);
     }

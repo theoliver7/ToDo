@@ -13,6 +13,16 @@ public class Aufgabe {
     private String beschreibung;
     private Uri bild_uri;
     private int wichtigkeit;
+    private long liste;
+    private int erledigt;
+
+    public int getErledigt() {
+        return erledigt;
+    }
+
+    public void setErledigt(int erledigt) {
+        this.erledigt = erledigt;
+    }
 
     public long getListe() {
         return liste;
@@ -21,12 +31,6 @@ public class Aufgabe {
     public void setListe(long liste) {
         this.liste = liste;
     }
-
-    private long liste;
-
-
-
-
 
     public Uri getBild_uri() {
         return bild_uri;

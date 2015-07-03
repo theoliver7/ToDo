@@ -37,16 +37,19 @@ public class AufgabenDAO extends DatabaseDAO {
         return todo_id;
     }
 
-    public ArrayList<String> getAlleAufgabenfromList(long foreignkey) {
+    public ArrayList<Aufgabe> getAlleAufgabenfromList(long foreignkey) {
         try {
             open();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        ArrayList aufgabenvonListe = new ArrayList<String>();
+        ArrayList aufgabenvonListe = new ArrayList<Aufgabe>();
         Cursor cursor = db.rawQuery(AufgabeSQL.getSqlQuerySelectAlleAufgabenFromListe() + foreignkey, null);
         while (cursor.moveToNext()) {
-            aufgabenvonListe.add(cursor.getString(0).toString());
+            Aufgabe aufgabe= new Aufgabe();
+            aufgabe.setAufgabe(cursor.getString(0));
+            aufgabe.setErledigt(cursor.getInt(1));
+            aufgabenvonListe.add(aufgabe);
         }
         close();
         return aufgabenvonListe;
@@ -113,7 +116,9 @@ public class AufgabenDAO extends DatabaseDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        db.rawQuery(AufgabeSQL.getSqlQueryAufgabeNichtErledigt() + "'" + aufgabenTitel + "'", null);
+        ContentValues werte = new ContentValues();
+        werte.put("Erledigt",0);
+        db.update(AufgabeSQL.TABLE_AUFGABEN, werte, "Titel=?", new String[]{aufgabenTitel});
         close();
 
     }
