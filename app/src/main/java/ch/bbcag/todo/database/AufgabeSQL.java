@@ -23,7 +23,7 @@ public class AufgabeSQL {
 
 
     public static String getSqlQuerySelectAlleAufgabenFromListe() {
-        return "SELECT " + AUFGABE_TITEL + " FROM  "
+        return "SELECT " + AUFGABE_TITEL + ","+ERLEDIGT+" FROM  "
                 + TABLE_AUFGABEN + " WHERE " + LISTE_ID + " = ";
     }
 
