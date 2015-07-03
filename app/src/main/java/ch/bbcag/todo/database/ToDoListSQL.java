@@ -25,4 +25,7 @@ public class ToDoListSQL {
     public static String getSqlQuerySelectForeignKey(String liste) {
         return "SELECT " + KEY_ID + " FROM " + TABLE_LISTEN + " WHERE " + LISTE_NAME + " = '" + liste + "';";
     }
+    public static String getSqlQueryListName(int foreignKey) {
+        return "SELECT " + LISTE_NAME + " FROM " + TABLE_LISTEN + " WHERE " + KEY_ID + " = '" + foreignKey + "';";
+    }
 }

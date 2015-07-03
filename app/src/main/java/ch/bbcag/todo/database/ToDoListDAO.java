@@ -59,4 +59,19 @@ public class ToDoListDAO extends DatabaseDAO {
         close();
         return primaryKey;
     }
+
+
+    public String nameAuslesen(int foreignkey) {
+        String listenname = "";
+        try {
+            open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Cursor cursor = db.rawQuery(ToDoListSQL.getSqlQueryListName(foreignkey), null);
+        cursor.moveToFirst();
+        listenname= cursor.getString(0);
+        close();
+        return listenname;
+    }
 }

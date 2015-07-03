@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -117,7 +118,9 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
                 try{
                     newAufgabe.setBild_uri(camera.getUriSavedImage());
 
-                Log.d("mytag", newAufgabe.getBild_uri().toString());
+                } catch(NullPointerException e) {
+                    Log.d("myTag", "GEEEEECAATCHED");
+                }
 
                 ToDoListDAO db = new ToDoListDAO(getActivity().getApplicationContext());
                 try {
@@ -136,7 +139,7 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
                 toast.show();
 
                 AlarmSetter alarm = new AlarmSetter( getActivity());
-                alarm.setAlert(getTime(year, month, day, hour, minute), newAufgabe.getAufgabe() );
+                alarm.setAlert(getTime(year, month, day, hour, minute), newAufgabe.getAufgabe());
 
                 Bundle bundle = new Bundle();
                 bundle.putString("Liste", liste.getSelectedItem().toString());
