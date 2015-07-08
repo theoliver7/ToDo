@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -32,10 +33,15 @@ public class Listen_Details_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.listen_details_layout, container, false);
         AufgabenDAO aufgabenTitel = new AufgabenDAO(getActivity());
-        ToDoListDAO foreignkey = new ToDoListDAO(getActivity());
-        addAufgabetolist(aufgabenTitel.getAlleAufgabenfromList(foreignkey.primaryKeyAuslesen(getListentitel())));
+        ToDoListDAO toDoListDAO = new ToDoListDAO(getActivity());
+        addAufgabetolist(aufgabenTitel.getAlleAufgabenfromList(toDoListDAO.primaryKeyAuslesen(getListentitel())));
+
+
+
+
         TextView listennametextview = (TextView) myView.findViewById(R.id.Listenname);
         listennametextview.setText(getListentitel());
+
         return myView;
     }
 
@@ -50,6 +56,16 @@ public class Listen_Details_Fragment extends Fragment {
         menu.clear();
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.plus_aufgabe, menu);
+        ToDoListDAO toDoListDAO = new ToDoListDAO(getActivity());
+        int fav = toDoListDAO.favoritenueberpruefen(getListentitel());
+
+        MenuItem favorit = (MenuItem) menu.findItem(R.id.favoriten);
+
+        if (fav == 1) {
+            favorit.setIcon(R.mipmap.full_star);
+        } else {
+            favorit.setIcon(R.mipmap.stern);
+        }
     }
 
     private void addAufgabetolist(ArrayList aufgabe) {
@@ -59,7 +75,7 @@ public class Listen_Details_Fragment extends Fragment {
         if (aufgabe.size() == 0) {
             TextView empty = (TextView) myView.findViewById(R.id.keineAufgaben);
             empty.setVisibility(View.VISIBLE);
-            Button aufgabenloeschen =(Button)myView.findViewById(R.id.aufgabenloeschen);
+            Button aufgabenloeschen = (Button) myView.findViewById(R.id.aufgabenloeschen);
             aufgabenloeschen.setVisibility(View.INVISIBLE);
         }
         final TextView aufgabeloeschen = (TextView) myView.findViewById(R.id.aufgabenloeschen);
@@ -82,6 +98,7 @@ public class Listen_Details_Fragment extends Fragment {
 
             }
         });
+
 
     }
 

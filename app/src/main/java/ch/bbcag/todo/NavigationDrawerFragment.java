@@ -1,7 +1,6 @@
 package ch.bbcag.todo;
 
 import android.app.Activity;
-import android.content.ClipData;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -9,12 +8,10 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,7 +20,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -31,7 +27,6 @@ import java.util.List;
 
 import ch.bbcag.todo.Database.ToDoList;
 import ch.bbcag.todo.Database.ToDoListDAO;
-import ch.bbcag.todo.Fragments.Listen_Details_Fragment;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -69,6 +64,7 @@ public class NavigationDrawerFragment extends Fragment {
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
     private List<ToDoList> toDoLists = new ArrayList<ToDoList>();
+
     public NavigationDrawerFragment() {
     }
 
@@ -114,34 +110,21 @@ public class NavigationDrawerFragment extends Fragment {
 
         toDoLists = db.getFavListen();
         ArrayAdapter todolisteadapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1);
-        for (ToDoList i: toDoLists){
+        for (ToDoList i : toDoLists) {
             todolisteadapter.add(i.getListenname());
         }
 
 
-
         mDrawerListView.setAdapter(todolisteadapter);
-                mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+        mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }
 
-    public void addListstoFavs(String liste, Context context, Activity activity, MenuItem item){
+    public void addListstoFavs(String liste, Context context, Activity activity, MenuItem item) {
         ToDoListDAO todo = new ToDoListDAO(context);
         todo.addListToFavorites(liste);
-        boolean inFavs = false;
+        item.setIcon(R.mipmap.full_star);
 
-        activity.recreate();
-
-        for (ToDoList e:toDoLists){
-            if(e.getListenname() == liste){
-                inFavs = true;
-            }
-        }
-        if(inFavs == true){
-            item.setIcon(R.mipmap.full_star);
-        } else{
-            item.setIcon(R.mipmap.stern);
-        }
 
     }
 

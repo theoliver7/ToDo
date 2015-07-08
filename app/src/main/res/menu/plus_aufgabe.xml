@@ -6,6 +6,7 @@
         android:id="@+id/favoriten"
         android:title="@string/favoriten"
         android:orderInCategory="100"
+        android:icon="@mipmap/stern"
         app:showAsAction="always" />
     <item
         android:id="@+id/plus_aufgabe"
@@ -15,7 +16,7 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/listeloeschen"
-        android:title="@string/plus_aufgabe"
+        android:title="@string/verwalten"
         android:icon="@mipmap/delete"
         app:showAsAction="always" />
 </menu>

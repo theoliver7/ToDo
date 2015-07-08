@@ -44,15 +44,15 @@ public class AufgabeAnsicht_Fragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.plus_aufgabe, menu);
+        inflater.inflate(R.menu.global, menu);
     }
 
     public void informationenSetzen(Aufgabe aufgabe) {
-        final TextView titel = (TextView) myView.findViewById(R.id.aufgabentitel);
-        final TextView beschreibung = (TextView) myView.findViewById(R.id.detailAnsichtBeschreibung);
-        final TextView wichtigkeit = (TextView) myView.findViewById(R.id.wichtigkeitText);
+         TextView titel = (TextView) myView.findViewById(R.id.aufgabentitel);
+         TextView beschreibung = (TextView) myView.findViewById(R.id.detailAnsichtBeschreibung);
+         TextView wichtigkeit = (TextView) myView.findViewById(R.id.wichtigkeitText);
+         ImageView imgview = (ImageView) myView.findViewById(R.id.imageView);
 
-        final ImageView imgview = (ImageView) myView.findViewById(R.id.imageView);
         titel.setText(aufgabe.getAufgabe());
         beschreibung.setText(aufgabe.getBeschreibung());
         wichtigkeit.setText(wichtigkeitErmitteln(aufgabe.getWichtigkeit()));
@@ -79,8 +79,9 @@ public class AufgabeAnsicht_Fragment extends Fragment {
                                           AufgabenDAO dao = new AufgabenDAO(getActivity());
 
                                           dao.aufgabeAlsErledigtMarkieren(getAufgabentitel());
-
-                                          String liste = db.nameAuslesen(dao.foreignKeyAuslesen(getAufgabentitel()));
+                                          String listenname = getAufgabentitel();
+                                          int debug= dao.foreignKeyAuslesen(listenname);
+                                          String liste = db.nameAuslesen(debug);
                                           bundle.putString("Liste", liste);
                                           myFragment.setArguments(bundle);
 

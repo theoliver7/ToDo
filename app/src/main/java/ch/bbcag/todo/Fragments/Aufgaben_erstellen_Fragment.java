@@ -1,11 +1,7 @@
 package ch.bbcag.todo.Fragments;
 
-import android.app.AlarmManager;
 import android.app.DatePickerDialog;
-import android.app.PendingIntent;
 import android.app.TimePickerDialog;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -33,7 +29,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import ch.bbcag.todo.Alarm.AlarmSetter;
-import ch.bbcag.todo.Alarm.AlertReceiver;
 import ch.bbcag.todo.Camera;
 import ch.bbcag.todo.Database.Aufgabe;
 import ch.bbcag.todo.Database.AufgabenDAO;
@@ -176,6 +171,7 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
 
 
                 }
+
             }
         });
 
