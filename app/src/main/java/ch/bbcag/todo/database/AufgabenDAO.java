@@ -100,7 +100,7 @@ public class AufgabenDAO extends DatabaseDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        Cursor cursor = db.rawQuery(AufgabeSQL.getSqlQuerySelectForeignKey() + "'" + aufgabenTitel + "'", null);
+        Cursor cursor = db.rawQuery(AufgabeSQL.getSqlQuerySelectForeignKey() + "'" + aufgabenTitel + "';", null);
         cursor.moveToFirst();
         close();
         return cursor.getInt(0);
