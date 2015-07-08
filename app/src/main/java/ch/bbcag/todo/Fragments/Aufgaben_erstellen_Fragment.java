@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -78,7 +79,6 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
                     }
                 }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
 
-                // Calendar.HOUR_OF_DAY, Calendar.MINUTE, true);
                 mTimePicker.setTitle("Zeit auswählen");
                 mTimePicker.show();
             }
@@ -113,48 +113,69 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
                 liste = (Spinner) myView.findViewById(R.id.ausgewählteliste);
                 wichtigkeit = (RadioGroup) myView.findViewById(R.id.wichtigkeit);
 
-                Aufgabe newAufgabe = new Aufgabe();
-                AufgabenDAO database = new AufgabenDAO(getActivity().getApplicationContext());
-                newAufgabe.setAufgabe(aufgabename.getText().toString());
-                newAufgabe.setBeschreibung(beschreibung.getText().toString());
-                try {
-                    newAufgabe.setBild_uri(camera.getUriSavedImage());
 
-                } catch (NullPointerException e) {
-                    Log.d("myTag", "GEEEEECAATCHED");
+
+                if(TextUtils.isEmpty(aufgabename.getText().toString()) || TextUtils.isEmpty(beschreibung.getText().toString())) {
+                    if(TextUtils.isEmpty(aufgabename.getText().toString())){
+                        aufgabename.setError("Aufgabe eingeben");
+
+                    }else {
+                        beschreibung.setError("Beschreibung hinzufügen");
+                    }
+                }else {
+                    Aufgabe newAufgabe = new Aufgabe();
+                    AufgabenDAO database = new AufgabenDAO(getActivity().getApplicationContext());
+                    newAufgabe.setAufgabe(aufgabename.getText().toString());
+                    newAufgabe.setBeschreibung(beschreibung.getText().toString());
+                    try {
+                        newAufgabe.setBild_uri(camera.getUriSavedImage());
+
+                    } catch (NullPointerException e) {
+                        Log.d("myTag", "GEEEEECAATCHED");
+                    }
+
+                    ToDoListDAO db = new ToDoListDAO(getActivity().getApplicationContext());
+                    try {
+                        db.open();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    newAufgabe.setListe(db.primaryKeyAuslesen(liste.getSelectedItem().toString()));
+                    newAufgabe.setWichtigkeit(wichtigkeit.getCheckedRadioButtonId());
+
+                    database.aufgabeerstellen(newAufgabe);
+
+
+                    db.close();
+                    Toast toast = Toast.makeText(getActivity().getApplicationContext(), "Aufgabe wurde erstellt", Toast.LENGTH_SHORT);
+                    toast.show();
+
+                    if (hour != 0 && minute != 0) {
+                        if(year == 0 && month==0 && day==0) {
+                            year = calendar.get(Calendar.YEAR);
+                            month = calendar.get(Calendar.MONTH);
+                            day = calendar.get(Calendar.DAY_OF_MONTH);
+                        }
+                        AlarmSetter alarm = new AlarmSetter(getActivity());
+                        alarm.setAlert(getTime(year, month, day, hour, minute), newAufgabe.getAufgabe());
+
+                        Toast.makeText(getActivity().getApplicationContext(), "Alarm wurde gesetzt",
+                                Toast.LENGTH_LONG).show();
+
+                    }
+                        Bundle bundle = new Bundle();
+                        bundle.putString("Liste", liste.getSelectedItem().toString());
+                        Fragment myFragment = new Listen_Details_Fragment();
+                        myFragment.setArguments(bundle);
+                        // update the main content by replacing fragments
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.container, myFragment)
+                                .commit();
+
+
+
                 }
-
-                ToDoListDAO db = new ToDoListDAO(getActivity().getApplicationContext());
-                try {
-                    db.open();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                newAufgabe.setListe(db.primaryKeyAuslesen(liste.getSelectedItem().toString()));
-                newAufgabe.setWichtigkeit(wichtigkeit.getCheckedRadioButtonId());
-
-                database.aufgabeerstellen(newAufgabe);
-
-
-                db.close();
-                Toast toast = Toast.makeText(getActivity().getApplicationContext(), "Aufgabe wurde erstellt", Toast.LENGTH_SHORT);
-                toast.show();
-
-                AlarmSetter alarm = new AlarmSetter(getActivity());
-                alarm.setAlert(getTime(year, month, day, hour, minute), newAufgabe.getAufgabe());
-
-                Bundle bundle = new Bundle();
-                bundle.putString("Liste", liste.getSelectedItem().toString());
-                Fragment myFragment = new Listen_Details_Fragment();
-                myFragment.setArguments(bundle);
-                // update the main content by replacing fragments
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, myFragment)
-                        .commit();
-
-                Toast.makeText(getActivity().getApplicationContext(), "Alarm wurde gesetzt",
-                        Toast.LENGTH_LONG).show();
             }
         });
 
@@ -179,17 +200,6 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
 
         long difference = cal.getTimeInMillis() - Calendar.getInstance().getTimeInMillis();
         return difference;
-    }
-
-    public void setAlert() {
-        long test = getTime(this.year, this.month, this.day, this.hour, this.minute);
-        Intent intent = new Intent(getActivity(), AlertReceiver.class);
-        int id_ = (int) System.currentTimeMillis();
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                getActivity().getApplicationContext(), id_, intent, 0);
-        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()
-                + test, pendingIntent);
     }
 
     @Override
