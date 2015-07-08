@@ -25,6 +25,25 @@ public class ToDoListDAO extends DatabaseDAO {
 
         return todo_id;
     }
+    public List<ToDoList> getFavListen(){
+            try {
+                open();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            List<ToDoList> toDoLists = new ArrayList<ToDoList>();
+            String selectQuery = "SELECT  Listenname FROM " + ToDoListSQL.TABLE_LISTEN+"WHERE Favoriten = 1;";
+
+            Cursor cursor = db.query(ToDoListSQL.TABLE_LISTEN, new String[]{"Listenname"}, null, null, null, null, null, null);
+            //Cursor cursor = db.rawQuery(selectQuery,null);
+            while (cursor.moveToNext()) {
+                ToDoList toDoList = new ToDoList();
+                toDoList.setListenname(cursor.getString(0));
+                toDoLists.add(toDoList);
+            }
+            close();
+            return toDoLists;
+    }
 
     public List<ToDoList> getAllListen() {
         try {
