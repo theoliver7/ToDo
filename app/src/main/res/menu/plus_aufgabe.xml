@@ -13,4 +13,9 @@
         android:orderInCategory="100"
         android:icon="@mipmap/plus"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/listeloeschen"
+        android:title="@string/plus_aufgabe"
+        android:icon="@mipmap/delete"
+        app:showAsAction="always" />
 </menu>

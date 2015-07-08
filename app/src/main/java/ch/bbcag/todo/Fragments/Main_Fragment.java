@@ -13,13 +13,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ch.bbcag.todo.R;
 import ch.bbcag.todo.Database.ToDoList;
 import ch.bbcag.todo.Database.ToDoListDAO;
+import ch.bbcag.todo.R;
 
 /**
  * Created by zascho on 17.06.2015.
@@ -28,13 +29,26 @@ public class Main_Fragment extends Fragment {
     private View myView;
     private ArrayAdapter todolisteadapter;
     private ListView todoliste;
-    private ToDoList liste;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.main_layout, container, false);
         getlisten();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         return myView;
     }
 
@@ -49,6 +63,10 @@ public class Main_Fragment extends Fragment {
             todolisteadapter.add(toDoLists.get(i).getListenname());
         }
         todoliste.setAdapter(todolisteadapter);
+        if (toDoLists.size() == 0) {
+            TextView meldung = (TextView) myView.findViewById(R.id.keineListen);
+            meldung.setVisibility(View.VISIBLE);
+        }
 
         todoliste.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -75,5 +93,6 @@ public class Main_Fragment extends Fragment {
         menu.clear();
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.plus_liste, menu);
+
     }
 }

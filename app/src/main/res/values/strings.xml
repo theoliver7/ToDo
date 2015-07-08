@@ -27,5 +27,6 @@
 
     <string name="mainDescription">Das ist eine Application</string>
     <string name="pls">Alarm set</string>
+    <string name="keinelisten">Sie haben noch keine ToDO Listen</string>
 
 </resources>

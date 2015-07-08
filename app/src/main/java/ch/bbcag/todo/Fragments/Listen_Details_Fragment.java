@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -35,7 +36,6 @@ public class Listen_Details_Fragment extends Fragment {
         addAufgabetolist(aufgabenTitel.getAlleAufgabenfromList(foreignkey.primaryKeyAuslesen(getListentitel())));
         TextView listennametextview = (TextView) myView.findViewById(R.id.Listenname);
         listennametextview.setText(getListentitel());
-
         return myView;
     }
 
@@ -56,19 +56,23 @@ public class Listen_Details_Fragment extends Fragment {
         ListView list = (ListView) myView.findViewById(R.id.listView);
         Ownarrayadapter ownarrayadapter = new Ownarrayadapter(this.getActivity().getApplicationContext(), aufgabe, this.getActivity().getLayoutInflater(), this.getActivity().getSupportFragmentManager());
         list.setAdapter(ownarrayadapter);
-
-
+        if (aufgabe.size() == 0) {
+            TextView empty = (TextView) myView.findViewById(R.id.keineAufgaben);
+            empty.setVisibility(View.VISIBLE);
+            Button aufgabenloeschen =(Button)myView.findViewById(R.id.aufgabenloeschen);
+            aufgabenloeschen.setVisibility(View.INVISIBLE);
+        }
         final TextView aufgabeloeschen = (TextView) myView.findViewById(R.id.aufgabenloeschen);
         aufgabeloeschen.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-            AufgabenDAO db = new AufgabenDAO(getActivity().getApplicationContext());
+                AufgabenDAO db = new AufgabenDAO(getActivity().getApplicationContext());
                 db.deleteAufgabe();
                 Bundle bundle = new Bundle();
-                TextView listenname= (TextView)myView.findViewById(R.id.Listenname);
-                bundle.putString("Liste",listenname.getText().toString() );
-                Fragment myFragment = new Main_Fragment();
+                TextView listenname = (TextView) myView.findViewById(R.id.Listenname);
+                bundle.putString("Liste", listenname.getText().toString());
+                Fragment myFragment = new Listen_Details_Fragment();
                 myFragment.setArguments(bundle);
                 // update the main content by replacing fragments
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

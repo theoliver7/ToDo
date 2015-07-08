@@ -5,9 +5,8 @@ package ch.bbcag.todo.Database;
  */
 public class ToDoListSQL {
     public static final String TABLE_LISTEN = "Listen";
-    private static final String KEY_ID = "id";
-    private static final String FAVORITEN = "Favoriten";
-    // TODOLISTE Table - column nmaes
+    public static final String KEY_ID = "id";
+    public static final String FAVORITEN = "Favoriten";
     public static final String LISTE_NAME = "Listenname";
 
     public static String getSqlQueryForCreateTableToDoList() {
@@ -16,11 +15,7 @@ public class ToDoListSQL {
                 + " TEXT, " + FAVORITEN + " INTEGER)";
     }
 
-    public static String getSqlQuerySelectAlleAufgaben() {
-        return "SELECT * FROM  "
-                + TABLE_LISTEN;
-    }
-    public static String getSqlQueryAddListToFavorites(String liste){
+    public static String getSqlQueryAddListToFavorites(){
         return "UPDATE " + TABLE_LISTEN + " SET "+ FAVORITEN +" = 1 WHERE " +LISTE_NAME +" =";
     }
 
@@ -31,4 +26,5 @@ public class ToDoListSQL {
     public static String getSqlQueryListName(int foreignKey) {
         return "SELECT " + LISTE_NAME + " FROM " + TABLE_LISTEN + " WHERE " + KEY_ID + " = '" + foreignKey + "';";
     }
+
 }

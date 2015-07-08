@@ -100,7 +100,16 @@ public class ToDoListDAO extends DatabaseDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        db.rawQuery(ToDoListSQL.getSqlQueryAddListToFavorites(liste)+ "'"+ liste+ "' ;",null);
+        db.rawQuery(ToDoListSQL.getSqlQueryAddListToFavorites()+ "'"+ liste+ "' ;",null);
+        close();
+    }
+    public void listeloeschen(String liste){
+        try {
+            open();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        db.delete(ToDoListSQL.TABLE_LISTEN, ToDoListSQL.KEY_ID+"=?", new String[]{liste});
         close();
     }
 }

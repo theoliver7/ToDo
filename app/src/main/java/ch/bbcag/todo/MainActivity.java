@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,12 +25,11 @@ import android.widget.Toast;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import ch.bbcag.todo.Fragments.AufgabeAnsicht_Fragment;
-import ch.bbcag.todo.Fragments.Aufgaben_erstellen_Fragment;
-import ch.bbcag.todo.Fragments.Listen_Details_Fragment;
-import ch.bbcag.todo.Fragments.Main_Fragment;
 import ch.bbcag.todo.Database.ToDoList;
 import ch.bbcag.todo.Database.ToDoListDAO;
+import ch.bbcag.todo.Fragments.AufgabeAnsicht_Fragment;
+import ch.bbcag.todo.Fragments.Aufgaben_erstellen_Fragment;
+import ch.bbcag.todo.Fragments.Main_Fragment;
 
 
 public class MainActivity extends ActionBarActivity
@@ -202,6 +202,29 @@ public class MainActivity extends ActionBarActivity
             Toast.makeText(this.getBaseContext(),"Zu Favoriten hinzugefuegt",
                     Toast.LENGTH_SHORT).show();
 
+
+        } else if (id == R.id.listeloeschen) {
+            ToDoListDAO db = new ToDoListDAO(getApplicationContext());
+            TextView listennametextview = (TextView) this.findViewById(R.id.Listenname);
+            String listenname = listennametextview.getText().toString();
+            try {
+                db.open();
+            } catch (SQLException e) {
+                Log.e("DB", " NO CONNECTION");
+            }
+            db.listeloeschen(listenname);
+            db.close();
+            Toast.makeText(getApplicationContext(), "Liste wurde geloescht",
+                    Toast.LENGTH_LONG).show();
+
+
+            Fragment myFragment = new Main_Fragment();
+            // update the main content by replacing fragments
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, myFragment)
+                    .commit();
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -234,18 +257,15 @@ public class MainActivity extends ActionBarActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-
+            View rootView = inflater.inflate(R.layout.main_layout, container, false);
             return rootView;
         }
 
         @Override
         public void onAttach(Activity activity) {
             super.onAttach(activity);
-
         }
-
-
     }
+
 
 }

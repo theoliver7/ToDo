@@ -53,6 +53,8 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
     private int minute, hour, day, month, year;
     private final Calendar calendar = Calendar.getInstance();
 
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -220,5 +222,9 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         s.setAdapter(adapter);
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
     }
 }
