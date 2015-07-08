@@ -153,7 +153,7 @@ public class Aufgaben_erstellen_Fragment extends Fragment {
                         .replace(R.id.container, myFragment)
                         .commit();
 
-                Toast.makeText(getActivity().getApplicationContext(), "Alarm wurde gesetzt",
+                Toast.makeText(getActivity().getApplicationContext(), getActivity().getString(R.string.alarmset),
                         Toast.LENGTH_LONG).show();
             }
         });

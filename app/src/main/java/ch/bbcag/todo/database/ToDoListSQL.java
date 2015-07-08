@@ -26,5 +26,8 @@ public class ToDoListSQL {
     public static String getSqlQueryListName(int foreignKey) {
         return "SELECT " + LISTE_NAME + " FROM " + TABLE_LISTEN + " WHERE " + KEY_ID + " = '" + foreignKey + "';";
     }
+    public static String getSqlQueryFavorite() {
+        return "SELECT " + FAVORITEN + " FROM " + TABLE_LISTEN + " WHERE " + LISTE_NAME + " = ";
+    }
 
 }

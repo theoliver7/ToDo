@@ -28,5 +28,13 @@
     <string name="mainDescription">Das ist eine Application</string>
     <string name="pls">Alarm set</string>
     <string name="keinelisten">Sie haben noch keine ToDO Listen</string>
+    <string name="favorithinzugefuegt">Zu Favoriten hinzugef\u00fcgt</string>
+    <string name="listegeloescht">Liste wurde gelöscht</string>
+    <string name="neuListeerstellt">Neue Liste wurde erstellt</string>
+    <string name="fav">Favoriten</string>
+    <string name="abbrechen">Abbrechen</string>
+    <string name="neuerlistenname">Wie soll ihre neue Liste heissen?</string>
+    <string name="erstellen">Erstellen</string>
+    <string name="alarmset">Alarm wurde gesetzt</string>
 
 </resources>

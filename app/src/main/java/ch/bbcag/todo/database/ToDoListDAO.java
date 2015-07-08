@@ -25,24 +25,22 @@ public class ToDoListDAO extends DatabaseDAO {
 
         return todo_id;
     }
-    public List<ToDoList> getFavListen(){
-            try {
-                open();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            List<ToDoList> toDoLists = new ArrayList<ToDoList>();
-            String selectQuery = "SELECT  Listenname FROM " + ToDoListSQL.TABLE_LISTEN+"WHERE Favoriten = 1;";
 
-            Cursor cursor = db.query(ToDoListSQL.TABLE_LISTEN, new String[]{"Listenname"}, null, null, null, null, null, null);
-            //Cursor cursor = db.rawQuery(selectQuery,null);
-            while (cursor.moveToNext()) {
-                ToDoList toDoList = new ToDoList();
-                toDoList.setListenname(cursor.getString(0));
-                toDoLists.add(toDoList);
-            }
-            close();
-            return toDoLists;
+    public List<ToDoList> getFavListen() {
+        try {
+            open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        List<ToDoList> toDoLists = new ArrayList<ToDoList>();
+        Cursor cursor = db.query(ToDoListSQL.TABLE_LISTEN, new String[]{"Listenname"}, ToDoListSQL.FAVORITEN+"=?", new String[]{"1"}, null, null, null, null);
+        while (cursor.moveToNext()) {
+            ToDoList toDoList = new ToDoList();
+            toDoList.setListenname(cursor.getString(0));
+            toDoLists.add(toDoList);
+        }
+        close();
+        return toDoLists;
     }
 
     public List<ToDoList> getAllListen() {
@@ -81,7 +79,6 @@ public class ToDoListDAO extends DatabaseDAO {
 
 
     public String nameAuslesen(int foreignkey) {
-        String listenname = "";
         try {
             open();
         } catch (SQLException e) {
@@ -89,7 +86,7 @@ public class ToDoListDAO extends DatabaseDAO {
         }
         Cursor cursor = db.rawQuery(ToDoListSQL.getSqlQueryListName(foreignkey), null);
         cursor.moveToFirst();
-        listenname= cursor.getString(0);
+        String listenname = cursor.getString(0);
         close();
         return listenname;
     }
@@ -100,16 +97,33 @@ public class ToDoListDAO extends DatabaseDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        db.rawQuery(ToDoListSQL.getSqlQueryAddListToFavorites()+ "'"+ liste+ "' ;",null);
+
+        ContentValues werte = new ContentValues();
+        werte.put("Favoriten", 1);
+        db.update(ToDoListSQL.TABLE_LISTEN,werte,ToDoListSQL.LISTE_NAME+"=?",new String[]{liste});
         close();
     }
-    public void listeloeschen(String liste){
+
+    public void listeloeschen(String liste) {
         try {
             open();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        db.delete(ToDoListSQL.TABLE_LISTEN, ToDoListSQL.KEY_ID+"=?", new String[]{liste});
+        db.delete(ToDoListSQL.TABLE_LISTEN, ToDoListSQL.LISTE_NAME + "=?", new String[]{liste});
         close();
+    }
+
+    public int favoritenueberpruefen(String liste) {
+        try {
+            open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        Cursor cursor = db.rawQuery(ToDoListSQL.getSqlQueryFavorite()+"'"+liste+"'", null);
+        cursor.moveToFirst();
+        int fav = cursor.getInt(0);
+        return fav;
     }
 }

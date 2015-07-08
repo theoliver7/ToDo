@@ -6,11 +6,9 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -135,14 +133,14 @@ public class MainActivity extends ActionBarActivity
         if (id == R.id.plus_liste) {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
-            alert.setTitle("Wie soll ihre neue Liste heissen?");
+            alert.setTitle(getString(R.string.neuerlistenname));
 
 
             // Set an EditText view to get user input
             final EditText input = new EditText(this);
             alert.setView(input);
 
-            alert.setPositiveButton("Erstellen", new DialogInterface.OnClickListener() {
+            alert.setPositiveButton(getString(R.string.erstellen), new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
 
                     ToDoList newList = new ToDoList();
@@ -162,19 +160,19 @@ public class MainActivity extends ActionBarActivity
                     fragmentManager.beginTransaction()
                             .replace(R.id.container, myFragment)
                             .commit();
-                    Toast toast = Toast.makeText(getApplicationContext(), "Neue Liste wurde erstellt", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.neuListeerstellt), Toast.LENGTH_SHORT);
                     toast.show();
 
 
                 }
             });
-            alert.setNeutralButton("Favoriten", new DialogInterface.OnClickListener() {
+            alert.setNeutralButton(getString(R.string.fav), new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
                     // Canceled.
                 }
             });
 
-            alert.setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
+            alert.setNegativeButton(getString(R.string.abbrechen), new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
 
                     // Canceled.
@@ -197,9 +195,11 @@ public class MainActivity extends ActionBarActivity
             String liste = favoriten.getText().toString();
 
             NavigationDrawerFragment drawer = new NavigationDrawerFragment();
-            drawer.addListstoFavs(liste, this.getApplicationContext(), this,item );
+            ToDoListDAO db= new ToDoListDAO(getApplicationContext());
 
-            Toast.makeText(this.getBaseContext(),"Zu Favoriten hinzugefuegt",
+            drawer.addListstoFavs(liste, this.getApplicationContext(), this, item);
+
+            Toast.makeText(this.getBaseContext(),getString(R.string.favorithinzugefuegt),
                     Toast.LENGTH_SHORT).show();
 
 
@@ -207,14 +207,10 @@ public class MainActivity extends ActionBarActivity
             ToDoListDAO db = new ToDoListDAO(getApplicationContext());
             TextView listennametextview = (TextView) this.findViewById(R.id.Listenname);
             String listenname = listennametextview.getText().toString();
-            try {
-                db.open();
-            } catch (SQLException e) {
-                Log.e("DB", " NO CONNECTION");
-            }
+
             db.listeloeschen(listenname);
-            db.close();
-            Toast.makeText(getApplicationContext(), "Liste wurde geloescht",
+
+            Toast.makeText(getApplicationContext(), getString(R.string.listegeloescht),
                     Toast.LENGTH_LONG).show();
 
 
