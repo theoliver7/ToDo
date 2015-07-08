@@ -3,6 +3,7 @@ package ch.bbcag.todo.Database;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -89,7 +90,8 @@ public class ToDoListDAO extends DatabaseDAO {
         }
         Cursor cursor = db.rawQuery(ToDoListSQL.getSqlQueryListName(foreignkey), null);
         cursor.moveToFirst();
-        listenname= cursor.getString(0);
+        Log.d("mytag", "" + cursor.getCount());
+        listenname = cursor.getString(0);
         close();
         return listenname;
     }
