@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -130,8 +131,6 @@ public class MainActivity extends ActionBarActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.plus_liste) {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -188,22 +187,22 @@ public class MainActivity extends ActionBarActivity
             Fragment myFragment = null;
             myFragment = new Aufgaben_erstellen_Fragment();
 
-            // update the main content by replacing fragments
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.container, myFragment)
                     .commit();
             return true;
         } else if (id == R.id.favoriten) {
-            ToDoListDAO test = new ToDoListDAO(this);
+            TextView favoriten = (TextView) this.findViewById(R.id.Listenname);
+            String liste = favoriten.getText().toString();
 
-            TextView hi = (TextView) this.findViewById(R.id.Listenname);
+            NavigationDrawerFragment drawer = new NavigationDrawerFragment();
+            drawer.addListstoFavs(liste, this.getApplicationContext(), this,item );
 
-            String teste = hi.getText().toString();
+            Toast.makeText(this.getBaseContext(),"Zu Favoriten hinzugefuegt",
+                    Toast.LENGTH_SHORT).show();
 
-            test.addListToFavorites(hi.getText().toString());
         }
-
         return super.onOptionsItemSelected(item);
     }
 

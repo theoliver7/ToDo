@@ -8,6 +8,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="verwalten">Verwaltung</string>
+    <string name="favListen">Meine Favoriten</string>
 
 
     <string name="bild_hinzufuegen">Bild hinzufügen</string>
@@ -20,6 +21,8 @@
     <string name="beschreibung">Beschreibung</string>
     <string name="plus_liste">Neue Liste hinzufügen</string>
     <string name="plus_aufgabe">Neue Aufgabe hinzufügen</string>
+    <string name="favoriten">Zu Favoriten hinzufügen</string>
+
 
 
     <string name="mainDescription">Das ist eine Application</string>
