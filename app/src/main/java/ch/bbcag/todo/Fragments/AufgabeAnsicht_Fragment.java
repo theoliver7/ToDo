@@ -92,8 +92,6 @@ public class AufgabeAnsicht_Fragment extends Fragment {
                                       }
                                   }
         );
-
-
     }
     private String getAufgabentitel() {
         Bundle bundle = this.getArguments();
